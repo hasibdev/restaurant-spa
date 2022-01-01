@@ -11,21 +11,21 @@
       <div class="row fullscreen">
          <!-- Left Content -->
          <div class="col-3">
-            <div v-for="cat in categories" :key="cat.id" @click="selectedCategory = cat" class="q-pa-md text-center pointer">
+            <div v-for="cat in categories" :key="cat.id" @click="selectedCategory = cat" class="q-pa-md q-mt-md text-center pointer">
                <q-img :src="cat.image.url" spinner-color="white"></q-img>
-               <h4 class="q-mt-lg">{{ cat.name }}</h4>
+               <h4 class="q-mt-md">{{ cat.name }}</h4>
             </div>
          </div>
          <!-- Right Content -->
          <div class="col-9 content-bg">
             <div class="q-pa-md">
-               <h2 class="text-muted q-mb-xl">{{selectedCategory.name}}</h2>
+               <h2 class="text-muted q-mb-xl q-mt-md">{{selectedCategory.name}}</h2>
 
-               <div class="row q-gutter-md">
-                  <div v-for="product in displayProducts" :key="product.id" @click="$router.push(`/products/${product.id}`)" class="col-md-4 col-sm-6 text-center pointer">
+               <div class="row q-col-gutter-md">
+                  <div v-for="product in displayProducts" :key="product.id" @click="$router.push(`/products/${product.id}`)" class="col-6 col-sm-4 col-md-3 text-center pointer">
                      <q-img :src="product.image.url" spinner-color="white"></q-img>
                      <h4 class="q-mt-lg">{{ product.name }}</h4>
-                     <h5 class="q-mt-md">${{ product.price }}</h5>
+                     <h5 class="q-mt-md text-grey-14">${{ product.price }}</h5>
                   </div>
                </div>
             </div>
