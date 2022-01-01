@@ -3,7 +3,7 @@
       <div class="row fullscreen">
          <!-- Left content -->
          <div class="col-4">
-            <div class="q-pa-md">
+            <div class="q-pa-md q-mt-lg">
                <q-img :src="product.image.url"></q-img>
 
                <h4 class="flex justify-between q-mt-lg">
@@ -16,11 +16,14 @@
          <!-- Right content -->
          <div class="col-8 content-bg q-pa-md">
             <div v-for="opt in product.options" :key="opt.id">
-               <h3>{{ opt.name }}</h3>
+               <h3 class="q-my-lg">{{ opt.name }}</h3>
 
-               <ul>
-                  <li v-for="item in opt.list" :key="item.id">{{ item.name }}</li>
-               </ul>
+               <carousel :items-to-show="4">
+                  <slide v-for="item in opt.list" :key="item.id">
+                     <div>{{ item.name }}</div>
+                  </slide>
+               </carousel>
+
             </div>
          </div>
       </div>
@@ -29,8 +32,14 @@
 
 <script>
 import { mapState } from 'vuex'
+import 'vue3-carousel/dist/carousel.css'
+import { Carousel, Slide, } from 'vue3-carousel'
+
 export default {
    name: "product-details",
+   components: {
+      Carousel, Slide,
+   },
    computed: {
       ...mapState('data', ['products']),
       product() {
