@@ -11,14 +11,14 @@
       <div class="row fullscreen">
          <!-- Left Content -->
          <div class="col-3">
-            <div v-for="cat in categories" :key="cat.id" @click="selectedCategory = cat" class="q-pa-md q-mt-md text-center pointer">
+            <div v-for="cat in categories" :key="cat.id" @click="selectedCategory = cat" class="q-pa-lg q-mt-md text-center pointer">
                <q-img :src="cat.image.url" spinner-color="white"></q-img>
                <h4 class="q-mt-md">{{ cat.name }}</h4>
             </div>
          </div>
          <!-- Right Content -->
          <div class="col-9 content-bg">
-            <div class="q-pa-md">
+            <div class="q-px-xl">
                <h2 class="text-muted q-mb-xl q-mt-md">{{selectedCategory.name}}</h2>
 
                <div class="row q-col-gutter-md">
