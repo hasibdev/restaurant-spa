@@ -1,12 +1,14 @@
 <template>
    <q-page class="">
       <!-- Welcom Overlay -->
-      <div v-if="showWelcome" class="welcom-screen z-max">
-         <div class="overlay"></div>
-         <div class="content">
-            <p @click="showWelcome = false" class="text-big q-mb-none">CLICK TO ORDER</p>
+      <transition appear enter-active-class="animated fadeIn" leave-active-class="animated slideOutUp">
+         <div v-if="showWelcome" class="welcom-screen z-max">
+            <div class="overlay"></div>
+            <div class="content">
+               <p @click="showWelcome = false" class="text-big q-mb-none">CLICK TO ORDER</p>
+            </div>
          </div>
-      </div>
+      </transition>
 
       <div class="row">
          <!-- Left Content -->
@@ -43,7 +45,7 @@ export default defineComponent({
    name: 'PageIndex',
    data() {
       return {
-         showWelcome: false,
+         showWelcome: true,
          selectedCategory: {},
          displayProducts: []
       }
@@ -71,7 +73,7 @@ export default defineComponent({
    background-repeat: no-repeat;
    background-size: cover;
    background-position: center center;
-   background-color: var(--primary);
+   background-color: #fff;
    position: fixed;
    height: 100vh;
    width: 100vw;
