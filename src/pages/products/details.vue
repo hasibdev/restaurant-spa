@@ -3,8 +3,8 @@
       <div class="row fullscreen">
          <!-- Left content -->
          <div class="col-4">
-            <div class="q-py-md q-px-xl q-mt-lg">
-               <q-img :src="product.image.url"></q-img>
+            <div class="q-py-md q-px-xl scrollable-div custom-scrollbar">
+               <q-img :src="product.image.url" class="q-mt-lg"></q-img>
 
                <h4 class="flex justify-between q-mt-lg">
                   <span>{{product.name}}</span>
@@ -26,7 +26,7 @@
                   </h6>
                </div>
 
-               <div class="q-mt-xl row justify-between q-col-gutter-md">
+               <div class="q-my-xl row justify-between q-col-gutter-md">
                   <div class="col-7">
                      <q-btn size="md" padding="10px" class="full-width q-mt-sm" unelevated color="primary">ADD TO CART</q-btn>
                   </div>
@@ -40,17 +40,19 @@
          </div>
          <!-- Right content -->
          <div class="col-8 content-bg q-pa-lg">
-            <div v-for="opt in product.options" :key="opt.id">
-               <h4 class="q-my-lg ">
-                  <span class="line-right">{{ opt.name }}</span>
-               </h4>
+            <div class="scrollable-div custom-scrollbar">
+               <div v-for="opt in product.options" :key="opt.id">
+                  <h4 class="q-my-lg ">
+                     <span class="line-right">{{ opt.name }}</span>
+                  </h4>
 
-               <carousel :items-to-show="4">
-                  <slide v-for="item in opt.list" :key="item.id">
-                     <div>{{ item.name }}</div>
-                  </slide>
-               </carousel>
+                  <carousel :items-to-show="4">
+                     <slide v-for="item in opt.list" :key="item.id">
+                        <div>{{ item.name }}</div>
+                     </slide>
+                  </carousel>
 
+               </div>
             </div>
          </div>
       </div>
