@@ -14,7 +14,7 @@
          <!-- Left Content -->
          <div class="col-3">
             <div class="scrollable-div custom-scrollbar">
-               <transition appear :enter-active-class="`animated fadeIn delay-${i+1}s`" v-for="(cat, i) in categories" :key="cat.id">
+               <transition appear :enter-active-class="`animated fadeIn delay-${i+1}`" v-for="(cat, i) in categories" :key="cat.id">
                   <div @click="selectedCategory = cat" class="q-pa-lg q-mt-md text-center pointer">
                      <q-img :src="cat.image.url" spinner-color="white"></q-img>
                      <h4 class="q-mt-md">{{ cat.name }}</h4>
@@ -28,7 +28,7 @@
                <h2 class="text-muted q-mb-xl q-mt-md">{{selectedCategory.name}}</h2>
 
                <div class="row q-col-gutter-md">
-                  <transition appear :enter-active-class="`animated fadeIn delay-${i+1}s`" v-for="(product, i) in displayProducts" :key="product.id">
+                  <transition appear :enter-active-class="`animated fadeIn delay-${i+1}`" v-for="(product, i) in displayProducts" :key="product.id">
                      <div @click="$router.push(`/products/${product.id}`)" class="col-6 col-sm-4 col-md-3 text-center pointer">
                         <q-img :src="product.image.url" spinner-color="white"></q-img>
                         <h4 class="q-mt-lg">{{ product.name }}</h4>

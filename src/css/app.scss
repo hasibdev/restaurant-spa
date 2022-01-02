@@ -22,6 +22,7 @@ h1,h2,h3,h4,h5,h6,p {
    cursor: pointer;
 }
 
+// Custom Scrollbar
 .custom-scrollbar {
    // Webkit
    &::-webkit-scrollbar {
@@ -34,3 +35,10 @@ h1,h2,h3,h4,h5,h6,p {
       background-color: var(--q-primary);
    }
 }
+
+// Amination delay
+@for $i from 1 through 10 {
+   .delay-#{$i} {
+      animation-delay: #{$i}50ms;
+   }
+ }
