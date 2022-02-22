@@ -23,7 +23,7 @@
             </div>
          </div>
          <!-- Right Content -->
-         <div class="col-9 content-bg">
+         <div class="col-9 bg-grey-2">
             <div class="q-px-xl scrollable-div custom-scrollbar">
                <h2 class="text-muted q-mb-xl q-mt-md">{{selectedCategory.name}}</h2>
 
@@ -49,7 +49,7 @@ export default defineComponent({
    name: 'PageIndex',
    data() {
       return {
-         showWelcome: true,
+         showWelcome: false,
          selectedCategory: {},
          displayProducts: []
       }
@@ -77,7 +77,7 @@ export default defineComponent({
    background-repeat: no-repeat;
    background-size: cover;
    background-position: center center;
-   background-color: var(--q-primary);
+   background-color: #fff;
    position: fixed;
    height: 100vh;
    width: 100vw;
