@@ -13,6 +13,9 @@ export default {
       },
       totalCartItems(state) {
          return state.cart.length
+      },
+      cartItems(state) {
+         return state.cart
       }
    },
    mutations: {

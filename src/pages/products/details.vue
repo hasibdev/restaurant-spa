@@ -100,7 +100,7 @@ export default {
    methods: {
       ...mapMutations('cart', ['ADD_TO_CART']),
       addToCart() {
-         this.ADD_TO_CART({})
+         this.ADD_TO_CART(this.product)
       }
    },
 }

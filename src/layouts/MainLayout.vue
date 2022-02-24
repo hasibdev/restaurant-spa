@@ -1,7 +1,7 @@
 <template>
    <q-layout view="hHh lpR fFr">
 
-      <q-drawer v-model="rightDrawerOpen" side="right" bordered>
+      <q-drawer v-model="rightDrawerOpen" class="custom-scrollbar" side="right" bordered>
          <cart-sidebar></cart-sidebar>
       </q-drawer>
 
