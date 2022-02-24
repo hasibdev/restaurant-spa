@@ -2,8 +2,7 @@
    <q-layout view="hHh lpR fFr">
 
       <q-drawer v-model="rightDrawerOpen" side="right" bordered>
-         <!-- drawer content -->
-         <p>Left drawer</p>
+         <cart-sidebar></cart-sidebar>
       </q-drawer>
 
       <q-page-container>
@@ -15,8 +14,12 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import CartSidebar from 'components/CartSidebar.vue'
 
 export default {
+   components: {
+      CartSidebar,
+   },
    data() {
       return {
          rightDrawerOpen: false
@@ -39,6 +42,9 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+.border-b {
+   border-bottom: 2px solid $grey-3;
+}
 </style>
 

@@ -10,6 +10,9 @@ export default {
    getters: {
       hasCartItem(state) {
          return Boolean(state.cart.length)
+      },
+      totalCartItems(state) {
+         return state.cart.length
       }
    },
    mutations: {
