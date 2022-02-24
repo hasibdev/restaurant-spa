@@ -30,7 +30,7 @@
             <h6>Total</h6>
             <h6>$200</h6>
          </div>
-         <h6 class="text-center text-white q-pa-md bg-primary">
+         <h6 @click="$router.push('/checkout')" class="text-center text-white q-pa-md bg-primary pointer">
             CHECKOUT
          </h6>
       </div>
@@ -56,6 +56,6 @@ export default {
 
 <style lang="scss" scoped>
 .top-shadow {
-   box-shadow: 0px -8px 12px #ddd;
+   box-shadow: 0px -5px 8px #ddd;
 }
 </style>

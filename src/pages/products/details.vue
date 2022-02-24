@@ -48,7 +48,11 @@
                <p v-if="!product.additions.length">No Additions avilable! </p>
                <carousel :items-to-show="3.5">
                   <slide v-for="addition in product.additions" :key="addition.id">
-                     <p class="text-body1 pointer">{{ addition.name }}</p>
+                     <div class="full-width">
+                        <q-img :src="product.image.url" class="q-mt-lg"></q-img>
+                        <p class="text-body1 pointer">{{ addition.name }}</p>
+                        <p class="text-body1 text-bold text-grey-14">${{ addition.price }}</p>
+                     </div>
                   </slide>
                </carousel>
 
@@ -62,7 +66,11 @@
 
                   <carousel :items-to-show="3.5">
                      <slide v-for="item in opt.list" :key="item.id">
-                        <p class="text-body1 pointer">{{ item.name }}</p>
+                        <div class="full-width">
+                           <q-img :src="product.image.url" class="q-mt-lg"></q-img>
+                           <p class="text-body1 pointer">{{ item.name }}</p>
+                           <p class="text-body1 text-bold text-grey-14">${{ item.price }}</p>
+                        </div>
                      </slide>
                   </carousel>
 
