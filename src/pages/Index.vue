@@ -1,5 +1,5 @@
 <template>
-   <q-page class="">
+   <q-page>
       <!-- Welcom Overlay -->
       <transition appear enter-active-class="animated fadeIn" leave-active-class="animated slideOutUp">
          <div v-if="showWelcome" class="welcom-screen z-max">
@@ -15,9 +15,9 @@
          <div class="col-3">
             <div class="scrollable-div custom-scrollbar">
                <transition appear :enter-active-class="`animated fadeIn delay-${i+1}`" v-for="(cat, i) in categories" :key="cat.id">
-                  <div @click="selectedCategory = cat" class="q-pa-lg q-mt-md text-center pointer">
-                     <q-img :src="cat.image.url" spinner-color="white"></q-img>
-                     <h4 class="q-mt-md">{{ cat.name }}</h4>
+                  <div @click="selectedCategory = cat" class="q-px-lg q-py-xs q-mt-md text-center pointer">
+                     <q-img :src="cat.image.url" spinner-color="white" style="max-height: 150px;"></q-img>
+                     <h5 class="q-mt-md">{{ cat.name }}</h5>
                   </div>
                </transition>
             </div>
@@ -25,14 +25,14 @@
          <!-- Right Content -->
          <div class="col-9 bg-grey-2">
             <div class="q-px-xl scrollable-div custom-scrollbar">
-               <h2 class="text-muted q-mb-xl q-mt-md">{{selectedCategory.name}}</h2>
+               <h2 class="text-muted q-my-md">{{selectedCategory.name}}</h2>
 
                <div class="row q-col-gutter-md">
                   <transition appear :enter-active-class="`animated fadeIn delay-${i+1}`" v-for="(product, i) in displayProducts" :key="product.id">
-                     <div @click="$router.push(`/products/${product.id}`)" class="col-6 col-sm-4 col-md-3 text-center pointer">
+                     <div @click="$router.push(`/products/${product.id}`)" class="col-6 col-sm-4 col-md-3 q-mt-md text-center pointer">
                         <q-img :src="product.image.url" spinner-color="white"></q-img>
-                        <h4 class="q-mt-lg">{{ product.name }}</h4>
-                        <h5 class="q-mt-md text-grey-14">${{ product.price }}</h5>
+                        <h5 class="q-mt-lg">{{ product.name }}</h5>
+                        <h6 class="q-mt-sm text-grey-14">${{ product.price }}</h6>
                      </div>
                   </transition>
                </div>
