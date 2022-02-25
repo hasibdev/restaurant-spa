@@ -42,14 +42,14 @@
          <div class="col-8 content-bg q-pa-lg">
             <div class="scrollable-div custom-scrollbar">
                <!-- Additions -->
-               <h4 class="q-mb-md">
+               <h5 class="q-mb-md">
                   <span class="line-right">Additions</span>
-               </h4>
+               </h5>
                <p v-if="!product.additions.length">No Additions avilable! </p>
                <carousel :items-to-show="3.5">
                   <slide v-for="addition in product.additions" :key="addition.id">
                      <div class="full-width">
-                        <q-img :src="product.image.url" class="q-mt-lg"></q-img>
+                        <!-- <q-img :src="product.image.url" class="q-mt-lg"></q-img> -->
                         <p class="text-body1 pointer">{{ addition.name }}</p>
                         <p class="text-body1 text-bold text-grey-14">${{ addition.price }}</p>
                      </div>
@@ -57,7 +57,8 @@
                </carousel>
 
                <!-- Options -->
-               <h4 class="q-mt-xl">Options</h4>
+               <div class="q-mt-xl"></div>
+               <!-- <h4 class="q-mt-xl">Options</h4> -->
                <p v-if="!product.options.length">No Options avilable! </p>
                <div v-for="opt in product.options" :key="opt.id">
                   <h5 class="q-my-md ">
@@ -109,6 +110,7 @@ export default {
       ...mapMutations('cart', ['ADD_TO_CART']),
       addToCart() {
          this.ADD_TO_CART(this.product)
+         this.emitter.emit("toggle-sidebar", true)
       }
    },
 }

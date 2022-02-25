@@ -29,16 +29,11 @@ export default {
       ...mapGetters('cart', ['hasCartItem'])
    },
 
-   watch: {
-      hasCartItem: {
-         handler: function (val) {
-            this.rightDrawerOpen = val
-            console.log('change', this.rightDrawerOpen)
-         },
-         immediate: true
-      }
+   mounted() {
+      this.emitter.on("toggle-sidebar", isOpen => {
+         this.rightDrawerOpen = isOpen
+      })
    },
-
 }
 </script>
 
