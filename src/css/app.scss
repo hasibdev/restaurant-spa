@@ -23,6 +23,10 @@ h1,h2,h3,h4,h5,h6,p {
    cursor: pointer;
 }
 
+.full-vh {
+   height: 100vh;
+}
+
 // Custom Scrollbar
 .custom-scrollbar {
    // Webkit
@@ -38,7 +42,7 @@ h1,h2,h3,h4,h5,h6,p {
 }
 
 // Amination delay
-@for $i from 1 through 10 {
+@for $i from 1 through 20 {
    .delay-#{$i} {
       animation-delay: #{$i}50ms;
    }

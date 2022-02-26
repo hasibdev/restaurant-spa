@@ -49,7 +49,7 @@ export default defineComponent({
    name: 'PageIndex',
    data() {
       return {
-         showWelcome: false,
+         showWelcome: true,
          selectedCategory: {},
          displayProducts: []
       }

@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import CartSidebar from 'components/CartSidebar.vue'
 
 export default {
@@ -25,9 +24,7 @@ export default {
          rightDrawerOpen: false
       }
    },
-   computed: {
-      ...mapGetters('cart', ['hasCartItem'])
-   },
+
 
    mounted() {
       this.emitter.on("toggle-sidebar", isOpen => {
