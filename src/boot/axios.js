@@ -12,6 +12,8 @@ const api = axios.create({
    baseURL: process.env.API_URL || 'http://localhost:4000'
 })
 
+console.log(process.env.API_URL)
+
 export default boot(({ app }) => {
    app.config.globalProperties.$axios = axios
    app.config.globalProperties.$api = api

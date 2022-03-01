@@ -69,7 +69,9 @@ module.exports = configure(function (ctx) {
 
          // Options below are automatically set depending on the env, set them if you want to override
          // extractCSS: false,
-         env: require('dotenv').config().parsed,
+         env: {
+            API_URL: process.env.API_URL || 'http://localhost:4000'
+         },
 
          // https://quasar.dev/quasar-cli/handling-webpack
          // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain

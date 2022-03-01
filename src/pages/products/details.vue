@@ -49,7 +49,7 @@
                <carousel :items-to-show="3.5">
                   <slide v-for="addition in product.additions" :key="addition.id">
                      <div class="full-width">
-                        <!-- <q-img :src="product.image.url" class="q-mt-lg"></q-img> -->
+                        <q-img :src="product.image.url" class="q-mt-lg"></q-img>
                         <p class="text-body1 pointer">{{ addition.name }}</p>
                         <p class="text-body1 text-bold text-grey-14">${{ addition.price }}</p>
                      </div>
