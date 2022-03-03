@@ -80,6 +80,9 @@
             </div>
          </div>
       </div>
+
+      <!-- Floating button -->
+      <cart-fab />
    </q-page>
 </template>
 
@@ -87,11 +90,12 @@
 import { mapState, mapMutations } from 'vuex'
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, } from 'vue3-carousel'
+import CartFab from 'components/CartFab.vue'
 
 export default {
    name: "product-details",
    components: {
-      Carousel, Slide,
+      Carousel, Slide, CartFab
    },
    data() {
       return {

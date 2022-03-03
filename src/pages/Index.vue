@@ -39,14 +39,21 @@
             </div>
          </div>
       </div>
+
+      <!-- Floating button -->
+      <cart-fab />
    </q-page>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
 import { mapState } from 'vuex'
+import CartFab from 'components/CartFab.vue'
 export default defineComponent({
    name: 'PageIndex',
+   components: {
+      CartFab,
+   },
    data() {
       return {
          selectedCategory: {},
@@ -59,7 +66,7 @@ export default defineComponent({
    methods: {
       hideWelcome() {
          this.$store.commit('data/SET_DATA', { property: 'showWelcome', data: false })
-      }
+      },
    },
    created() {
       this.selectedCategory = this.categories[0]

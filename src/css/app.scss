@@ -93,6 +93,16 @@ input:focus {
    }
 }
 
+// Small Device
+@media (min-width: $breakpoint-xs) {
+   .d-sm-block {
+      display: block;
+   }
+   .d-sm-none {
+      display: none;
+   }
+}
+
 
 // Mobile Device
 @media (max-width: $breakpoint-xs) {
