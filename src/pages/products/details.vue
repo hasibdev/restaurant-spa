@@ -12,7 +12,7 @@
                </h5>
                <p class="q-mt-lg">{{ product.description }}</p>
 
-               <div class="flex justify-between items-center q-mt-xl">
+               <div class="flex justify-between items-center q-mt-md mt-md-xl">
                   <h6 class="flex items-center">
                      QTY
                      <span class="flex column items-center q-ml-sm">
@@ -26,7 +26,7 @@
                   </h6>
                </div>
 
-               <div class="q-my-xl row justify-between q-col-gutter-md">
+               <div class="q-my-md my-md-xl row justify-between q-col-gutter-md">
                   <div class="col-7">
                      <q-btn @click="addToCart" size="md" padding="10px" class="full-width q-mt-sm" unelevated color="primary">ADD TO CART</q-btn>
                   </div>
