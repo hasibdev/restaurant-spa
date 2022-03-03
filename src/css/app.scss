@@ -1,8 +1,8 @@
 // app global css in SCSS form
 
 body {
-  overflow: hidden !important;
-  max-height: 100vh !important;
+   min-height: 100vh;
+   overflow-x: hidden;
   .scrollable-div {
    height: 100vh;
    overflow-y: auto;
@@ -13,6 +13,19 @@ body {
 h1,h2,h3,h4,h5,h6,p {
    margin-top: 0;
    margin-bottom: 0px;
+}
+
+a {
+   text-decoration: none;
+}
+ul {
+   list-style: none;
+}
+h4 {
+   font-size: 27px;
+}
+input:focus {
+   outline: none;
 }
 
 .content-bg {
@@ -41,6 +54,10 @@ h1,h2,h3,h4,h5,h6,p {
    }
 }
 
+.d-none {
+   display: none;
+}
+
 // Amination delay
 @for $i from 1 through 20 {
    .delay-#{$i} {
@@ -62,6 +79,18 @@ h1,h2,h3,h4,h5,h6,p {
       padding-left: 48px;
       padding-right: 48px;
    }
+   .mb-md-none {
+      margin-bottom: 0;
+   }
+   .justiry-md-center {
+      justify-content: center;
+   }
+   .d-md-block {
+      display: block;
+   }
+   .d-md-none {
+      display: none;
+   }
 }
 
 
@@ -71,6 +100,11 @@ h1,h2,h3,h4,h5,h6,p {
       font-size: 30px;
       line-height: 20px;
    }
+
+   h4 {
+      font-size: 18px;
+   }
+
    h5 {
       font-size: 18px;
    }

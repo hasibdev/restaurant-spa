@@ -1,19 +1,27 @@
 <template>
    <q-page>
-      <div class="flex full-vh">
+      <div class="row wrapper">
          <!-- lEFT SIDE -->
-         <div class="grow-1 bg-grey-2 q-pa-lg">
-            <h4 class="text-grey">REVIEW ORDER</h4>
+         <div class="col-12 col-md-8 bg-grey-2 q-pa-lg">
+            <div class="flex justify-between">
+               <h4 class="text-grey">REVIEW ORDER</h4>
+
+               <h4 class="text-grey d-md-none">
+                  <router-link class="text-grey" to="/">
+                     <q-icon name="arrow_back_ios" /> BACK TO MENU
+                  </router-link>
+               </h4>
+            </div>
 
             <div v-for="item in cartItems" :key="item.id" class="row">
-               <div class="col-4 q-pa-md">
+               <div class="col-12 col-sm-4 q-pa-md">
                   <q-img :src="item.image.url" class="q-mt-lg"></q-img>
                </div>
-               <div class="col-8 q-pl-md">
+               <div class="col-12 col-sm-8 q-pl-md">
                   <h6>{{ item.name }}</h6>
 
                   <div class="row items-center">
-                     <div class="col-4">
+                     <div class="col-12 col-md-4 q-mb-md mb-md-none">
                         <ul class="q-pl-none text-grey-14">
                            <li class="flex justify-between q-mt-sm"><span>ONIONS</span>
                               <q-icon name="close" />
@@ -26,8 +34,8 @@
                            </li>
                         </ul>
                      </div>
-                     <div class="col-4">
-                        <h6 class="flex items-center justify-center">
+                     <div class="col-6 col-md-4">
+                        <h6 class="flex items-center justiry-md-center">
                            QTY
                            <span class="flex column items-center q-ml-sm">
                               <q-icon @click="++form.quantity" name="keyboard_arrow_up" class="text-grey-14 pointer" />
@@ -36,11 +44,13 @@
                            </span>
                         </h6>
                      </div>
-                     <div class="col-4">
-                        <div class="flex items-center">
+                     <div class="col-6 col-md-4">
+                        <div class="flex items-center justify-between">
                            <h6>$6.50</h6>
 
-                           <q-icon name="round_cancel" class="text-grey-6 pointer text-h5" />
+                           <div>
+                              <q-icon name="cancel" class="text-grey-6 pointer text-h5" />
+                           </div>
                         </div>
                      </div>
                   </div>
@@ -50,9 +60,11 @@
 
          </div>
          <!-- RIGHT SIDE -->
-         <div class="bg-white q-px-xl q-mt-xl right-content">
-            <h4 class="text-grey">
-               <q-icon name="arrow_back_ios" /> BACK TO MENU
+         <div class="col-12 col-md-4 bg-white q-px-xl q-mt-xl right-content">
+            <h4 class="text-grey d-none d-md-block">
+               <router-link class="text-grey" to="/">
+                  <q-icon name="arrow_back_ios" /> BACK TO MENU
+               </router-link>
             </h4>
 
             <ul class="q-pa-lg bg-grey-3 q-mt-md">
@@ -72,12 +84,15 @@
 
             <h5 class="flex justify-between q-mt-xl">
                <span class="text-grey-6">TOTAL</span>
-               <span class="text-grey-8"> $24.36</span>
+               <strong class="text-grey-8">$24.36</strong>
             </h5>
+
+            <!-- Empty space -->
+            <div style="height: 140px;"></div>
 
             <div class="text-center sidebar-bottom-content">
                <q-btn color="primary" class="full-width q-py-md text-body1">PAY</q-btn>
-               <h6 class="q-mt-md text-grey q-my-md">ENTER COUPON</h6>
+               <input class="q-py-md full-width q-pa-md no-border" placeholder="ENTER COUPON" />
             </div>
          </div>
       </div>
@@ -107,6 +122,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.row.wrapper {
+   min-height: 100vh;
+}
 .grow-1 {
    flex-grow: 1;
 }

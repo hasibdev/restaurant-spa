@@ -24,7 +24,7 @@
          </div>
          <!-- Right Content -->
          <div class="col-8 col-md-9 bg-grey-2">
-            <div class="q-px-sm px-xl-md scrollable-div custom-scrollbar">
+            <div class="q-px-md px-xl-md scrollable-div custom-scrollbar">
                <h2 class="text-muted q-my-md">{{selectedCategory.name}}</h2>
 
                <div class="row q-col-gutter-md">

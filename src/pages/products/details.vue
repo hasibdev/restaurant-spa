@@ -2,8 +2,8 @@
    <q-page>
       <div class="row">
          <!-- Left content -->
-         <div class="col-4">
-            <div class="q-py-md q-px-xl scrollable-div overflow-hidden-x custom-scrollbar">
+         <div class="col-12 col-sm-4">
+            <div class="q-py-md q-px-md px-xl-md">
                <q-img :src="product.image.url" class="q-mt-lg"></q-img>
 
                <h5 class="flex justify-between q-mt-lg">
@@ -39,17 +39,17 @@
             </div>
          </div>
          <!-- Right content -->
-         <div class="col-8 content-bg q-pa-lg">
-            <div class="scrollable-div custom-scrollbar">
+         <div class="col-12 col-sm-8 content-bg q-pa-lg">
+            <div class="">
                <!-- Additions -->
                <h5 class="q-mb-md">
                   <span class="line-right">Additions</span>
                </h5>
                <p v-if="!product.additions.length">No Additions avilable! </p>
-               <carousel :items-to-show="3.5">
+               <carousel :items-to-show="4.5">
                   <slide v-for="addition in product.additions" :key="addition.id">
                      <div class="full-width">
-                        <q-img :src="product.image.url" class="q-mt-lg"></q-img>
+                        <!-- <q-img :src="product.image.url" class="q-mt-lg"></q-img> -->
                         <p class="text-body1 pointer">{{ addition.name }}</p>
                         <p class="text-body1 text-bold text-grey-14">${{ addition.price }}</p>
                      </div>
@@ -65,10 +65,10 @@
                      <span class="line-right">{{ opt.name }}</span>
                   </h5>
 
-                  <carousel :items-to-show="3.5">
+                  <carousel :items-to-show="4.5">
                      <slide v-for="item in opt.list" :key="item.id">
                         <div class="full-width">
-                           <q-img :src="product.image.url" class="q-mt-lg"></q-img>
+                           <!-- <q-img :src="product.image.url" class="q-mt-lg"></q-img> -->
                            <p class="text-body1 pointer">{{ item.name }}</p>
                            <p class="text-body1 text-bold text-grey-14">${{ item.price }}</p>
                         </div>
