@@ -12,10 +12,10 @@
 
       <div v-if="!showWelcome" class="row">
          <!-- Left Content -->
-         <div class="col-3">
+         <div class="col-4 col-md-3">
             <div class="scrollable-div custom-scrollbar">
                <transition appear :enter-active-class="`animated fadeIn delay-${i+1}`" v-for="(cat, i) in categories" :key="cat.id">
-                  <div @click="selectedCategory = cat" class="q-px-lg q-py-xs q-mt-md text-center pointer">
+                  <div @click="selectedCategory = cat" class="q-px-sm px-xl-md q-py-xs q-mt-md text-center pointer">
                      <q-img :src="cat.image.url" spinner-color="white" style="max-height: 150px;"></q-img>
                      <h5 class="q-mt-md">{{ cat.name }}</h5>
                   </div>
@@ -23,16 +23,16 @@
             </div>
          </div>
          <!-- Right Content -->
-         <div class="col-9 bg-grey-2">
-            <div class="q-px-xl scrollable-div custom-scrollbar">
+         <div class="col-8 col-md-9 bg-grey-2">
+            <div class="q-px-sm px-xl-md scrollable-div custom-scrollbar">
                <h2 class="text-muted q-my-md">{{selectedCategory.name}}</h2>
 
                <div class="row q-col-gutter-md">
                   <transition appear :enter-active-class="`animated fadeIn delay-${i+1}`" v-for="(product, i) in displayProducts" :key="product.id">
                      <div @click="$router.push(`/products/${product.id}`)" class="col-6 col-sm-4 col-md-3 q-mt-md text-center pointer">
                         <q-img :src="product.image.url" spinner-color="white"></q-img>
-                        <h5 class="q-mt-lg">{{ product.name }}</h5>
-                        <h6 class="q-mt-sm text-grey-14">${{ product.price }}</h6>
+                        <h5 class="q-mt-sm">{{ product.name }}</h5>
+                        <h6 class="q-mt-none text-grey-14">${{ product.price }}</h6>
                      </div>
                   </transition>
                </div>

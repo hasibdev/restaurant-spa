@@ -47,3 +47,31 @@ h1,h2,h3,h4,h5,h6,p {
       animation-delay: #{$i}50ms;
    }
  }
+
+
+//  Responsive
+// ///////////
+
+// Large Device
+@media (min-width: $breakpoint-lg) {
+
+}
+// Medium Device
+@media (min-width: 1024px) {
+   .px-xl-md {
+      padding-left: 48px;
+      padding-right: 48px;
+   }
+}
+
+
+// Mobile Device
+@media (max-width: $breakpoint-xs) {
+   h2 {
+      font-size: 30px;
+      line-height: 20px;
+   }
+   h5 {
+      font-size: 18px;
+   }
+}
