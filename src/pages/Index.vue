@@ -5,7 +5,7 @@
          <div v-if="showWelcome" class="welcom-screen z-max">
             <div class="overlay"></div>
             <div class="content">
-               <p @click="showWelcome = false" class="text-big q-mb-none">CLICK TO ORDER</p>
+               <p @click="hideWelcome" class="text-big q-mb-none">CLICK TO ORDER</p>
             </div>
          </div>
       </transition>
@@ -49,13 +49,17 @@ export default defineComponent({
    name: 'PageIndex',
    data() {
       return {
-         showWelcome: true,
          selectedCategory: {},
          displayProducts: []
       }
    },
    computed: {
-      ...mapState('data', ['categories', 'products'])
+      ...mapState('data', ['categories', 'products', 'showWelcome'])
+   },
+   methods: {
+      hideWelcome() {
+         this.$store.commit('data/SET_DATA', { property: 'showWelcome', data: false })
+      }
    },
    created() {
       this.selectedCategory = this.categories[0]

@@ -4,9 +4,10 @@ export default {
    namespaced: true,
    state: function () {
       return {
-         ategories: null,
+         categories: null,
          products: null,
-         dataLoaded: false
+         dataLoaded: false,
+         showWelcome: true
       }
    },
    getters: {
