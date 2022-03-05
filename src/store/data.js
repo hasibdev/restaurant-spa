@@ -11,6 +11,7 @@ export default {
       }
    },
    getters: {
+      getProductById: state => id => state.products.find(p => p.id == id)
    },
    mutations: {
       SET_DATA(state, { property, data }) {

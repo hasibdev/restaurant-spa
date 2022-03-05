@@ -1,5 +1,5 @@
 <template>
-   <q-page>
+   <q-page v-if="product">
       <div class="row">
          <!-- Left content -->
          <div class="col-12 col-sm-4">
@@ -16,9 +16,9 @@
                   <h6 class="flex items-center">
                      QTY
                      <span class="flex column items-center q-ml-sm">
-                        <q-icon @click="++form.quantity" name="keyboard_arrow_up" class="text-grey-14 pointer" />
-                        <span class="text-primary">{{ form.quantity }}</span>
-                        <q-icon @click="--form.quantity" name="keyboard_arrow_down" class="text-grey-14 pointer" />
+                        <q-icon @click="++product.quantity" name="keyboard_arrow_up" class="text-grey-14 pointer" />
+                        <span class="text-primary">{{ product.quantity }}</span>
+                        <q-icon @click="--product.quantity" name="keyboard_arrow_down" class="text-grey-14 pointer" />
                      </span>
                   </h6>
                   <h6>
@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations, mapGetters } from 'vuex'
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, } from 'vue3-carousel'
 import CartFab from 'components/CartFab.vue'
@@ -99,15 +99,17 @@ export default {
    },
    data() {
       return {
-         form: {
-            quantity: 1
-         },
+         product: null
       }
    },
    computed: {
       ...mapState('data', ['products']),
-      product() {
-         return this.products.find(p => p.id == this.$route.params.id)
+      ...mapGetters('data', ['getProductById']),
+   },
+   created() {
+      this.product = {
+         ...this.getProductById(this.$route.params.id),
+         quantity: 1
       }
    },
    methods: {

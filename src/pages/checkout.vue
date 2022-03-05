@@ -60,7 +60,7 @@
 
          </div>
          <!-- RIGHT SIDE -->
-         <div class="col-12 col-md-4 bg-white q-px-xl q-mt-xl right-content">
+         <div class="col-12 col-md-4 bg-white q-px-md px-xl-sm q-mt-xl right-content">
             <h4 class="text-grey d-none d-md-block">
                <router-link class="text-grey" to="/">
                   <q-icon name="arrow_back_ios" /> BACK TO MENU
