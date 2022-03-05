@@ -1,6 +1,6 @@
 <template>
    <q-page v-if="product">
-      <div class="row">
+      <div class="row min-vh">
          <!-- Left content -->
          <div class="col-12 col-sm-4">
             <div class="q-py-md q-px-md px-xl-md">
@@ -8,7 +8,7 @@
 
                <h5 class="flex justify-between q-mt-lg">
                   <span>{{product.name}}</span>
-                  <span class="">${{product.price}}</span>
+                  <span class="">{{ getCurrency(product.price) }}</span>
                </h5>
                <p class="q-mt-lg">{{ product.description }}</p>
 
@@ -22,7 +22,7 @@
                      </span>
                   </h6>
                   <h6>
-                     <span class="text-grey-14 q-mr-md">TOTAL:</span> $6.50
+                     <span class="text-grey-14 q-mr-md">TOTAL:</span> {{ getCurrency(getTotal) }}
                   </h6>
                </div>
 
@@ -47,8 +47,8 @@
                </h5>
                <p v-if="!product.additions.length">No Additions avilable! </p>
                <carousel :items-to-show="4.5">
-                  <slide v-for="addition in product.additions" :key="addition.id">
-                     <div class="full-width">
+                  <slide v-for="addition in product.additions" :key="addition.id" class="q-pa-lg">
+                     <div @click="updateActiveAddition(addition)" class="pointer q-pa-md each-addition-item" :class="{active: additionActiveState(addition)}">
                         <!-- <q-img :src="product.image.url" class="q-mt-lg"></q-img> -->
                         <p class="text-body1 pointer">{{ addition.name }}</p>
                         <p class="text-body1 text-bold text-grey-14">${{ addition.price }}</p>
@@ -66,11 +66,11 @@
                   </h5>
 
                   <carousel :items-to-show="4.5">
-                     <slide v-for="item in opt.list" :key="item.id">
-                        <div class="full-width">
+                     <slide v-for="item in opt.list" :key="item.id" class="q-pa-lg">
+                        <div @click="updateActiveOption(opt, item)" class="pointer q-pa-md each-option-item" :class="{active: optionActiveState(opt.id, item.id)}">
                            <!-- <q-img :src="product.image.url" class="q-mt-lg"></q-img> -->
                            <p class="text-body1 pointer">{{ item.name }}</p>
-                           <p class="text-body1 text-bold text-grey-14">${{ item.price }}</p>
+                           <p class="text-body1 text-bold text-grey-14">{{ getCurrency(item.price) }}</p>
                         </div>
                      </slide>
                   </carousel>
@@ -91,9 +91,11 @@ import { mapState, mapMutations, mapGetters } from 'vuex'
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, } from 'vue3-carousel'
 import CartFab from 'components/CartFab.vue'
+import getCurrency from '../../mixins/getCurrency'
 
 export default {
    name: "product-details",
+   mixins: [getCurrency],
    components: {
       Carousel, Slide, CartFab
    },
@@ -105,19 +107,79 @@ export default {
    computed: {
       ...mapState('data', ['products']),
       ...mapGetters('data', ['getProductById']),
+      additionActiveState() {
+         return (addition) => {
+            return this.product.activeAdditions.includes(addition)
+         }
+      },
+      optionActiveState() {
+         return (optId, itemId) => {
+            const opt = this.product.activeOptions.find(o => o.id === optId)
+
+            return opt.value.id === itemId
+         }
+      },
+      totalAdditions() {
+         return this.product.activeAdditions.reduce((acc, item) => {
+            return acc + item.price
+         }, 0)
+      },
+      totalOptions() {
+         return this.product.activeOptions.reduce((acc, item) => {
+            return acc + item.value.price
+         }, 0)
+      },
+      getTotal() {
+         return (this.product.price + this.totalAdditions + this.totalOptions) * this.product.quantity
+      }
    },
    created() {
-      this.product = {
-         ...this.getProductById(this.$route.params.id),
-         quantity: 1
-      }
+      this.setProductData()
    },
    methods: {
       ...mapMutations('cart', ['ADD_TO_CART']),
       addToCart() {
          this.ADD_TO_CART(this.product)
          this.emitter.emit("toggle-sidebar", true)
+      },
+      setProductData() {
+         this.product = {
+            ...this.getProductById(this.$route.params.id),
+            quantity: 1,
+            activeAdditions: [],
+            activeOptions: []
+         }
+
+         if (this.product.options && this.product.options.length > 0) {
+            this.product.options.map((o, index) => {
+               this.product.activeOptions[index] = {
+                  id: o.id,
+                  name: o.name,
+                  value: o.list[0]
+               }
+            })
+         }
+      },
+      updateActiveOption(opt, item) {
+         const prevOpt = this.product.activeOptions.find(o => o.id === opt.id)
+
+         prevOpt.value = {
+            id: item.id,
+            name: item.name,
+            price: item.price
+         }
+      },
+
+      updateActiveAddition(addition) {
+         const prevItem = this.product.activeAdditions.find(a => a.id === addition.id)
+
+         if (prevItem) {
+            this.product.activeAdditions = this.product.activeAdditions.filter(a => a.id != addition.id)
+         } else {
+            this.product.activeAdditions.push(addition)
+         }
       }
+
    },
 }
 </script>
@@ -134,6 +196,22 @@ export default {
       height: 1px;
       background: $grey-5;
       left: calc(100% + 35px);
+   }
+}
+
+.each-addition-item {
+   transition: all 0.15s ease-in-out;
+   &.active {
+      background: white;
+      box-shadow: 0px 0px 20px #ddd;
+   }
+}
+.each-option-item {
+   transition: all 0.15s ease-in-out;
+   &:hover,
+   &.active {
+      background: white;
+      box-shadow: 0px 0px 20px #ddd;
    }
 }
 </style>
