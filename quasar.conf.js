@@ -28,6 +28,7 @@ module.exports = configure(function (ctx) {
          'axios',
          'data',
          'plugins',
+         'routeConfig'
       ],
 
       // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css

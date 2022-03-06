@@ -1,3 +1,4 @@
+import checkout from '../middlewares/checkout'
 
 const routes = [
    {
@@ -6,7 +7,13 @@ const routes = [
       children: [
          { path: '', component: () => import('pages/Index.vue') },
          { path: '/products/:id', component: () => import('pages/products/details.vue') },
-         { path: '/checkout', component: () => import('pages/checkout.vue') },
+         {
+            path: '/checkout',
+            component: () => import('pages/checkout.vue'),
+            meta: {
+               middleware: [checkout]
+            },
+         },
       ]
    },
 

@@ -73,7 +73,7 @@
                   <span class="text-bold">$17.00</span>
                </li>
                <li class="flex justify-between q-mt-sm text-body1">
-                  <span>TAX [5%]</span>
+                  <span>TAX [{{ settings.tax }}%]</span>
                   <span class="text-bold">$2.36</span>
                </li>
                <li class="flex justify-between q-mt-sm text-body1">
@@ -100,9 +100,10 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 
 export default {
+
    data() {
       return {
          form: {
@@ -115,7 +116,8 @@ export default {
    },
 
    computed: {
-      ...mapGetters('cart', ['cartItems'])
+      ...mapGetters('cart', ['cartItems']),
+      ...mapState('data', ['settings'])
    },
 
 }
