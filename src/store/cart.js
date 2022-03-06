@@ -16,8 +16,10 @@ export default {
       cartItems(state) {
          return state.cart
       },
-      getCartTotal(state) {
-         return
+      getCartTotal(state, getters) {
+         return state.cart.reduce((acc, item) => {
+            return acc + getters.getTotalPerItem(item.uid)
+         }, 0)
       },
       getTotalPerItem(state) {
          return uid => {

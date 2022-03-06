@@ -6,7 +6,7 @@
          <div class="text-center" style="flex-grow: 1;">
             <q-img :src="item.image.url" spinner-color="white" style="max-height: 150px;"></q-img>
             <h6 class="q-mt-md">{{item.name}}</h6>
-            <h6>${{ getTotalPerItem(item.uid) }}</h6>
+            <h6>{{ getCurrency(getTotalPerItem(item.uid)) }}</h6>
          </div>
 
          <div class="q-px-sm">
@@ -28,7 +28,7 @@
       <div class="fixed-bottom bg-white">
          <div class="flex justify-between q-pa-md top-shadow">
             <h6>Total</h6>
-            <h6>$200</h6>
+            <h6>{{ getCurrency(getCartTotal) }}</h6>
          </div>
          <h6 @click="$router.push('/checkout')" class="text-center text-white q-pa-md bg-primary pointer">
             CHECKOUT
@@ -40,14 +40,16 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import getCurrency from '../mixins/getCurrency'
 export default {
+   mixins: [getCurrency],
    data() {
       return {
 
       }
    },
    computed: {
-      ...mapGetters('cart', ['totalCartItems', 'cartItems', 'getTotalPerItem']),
+      ...mapGetters('cart', ['totalCartItems', 'cartItems', 'getTotalPerItem', 'getCartTotal']),
    },
    methods: {
       addQuantity(uid) {
