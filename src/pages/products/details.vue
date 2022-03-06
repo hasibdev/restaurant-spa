@@ -51,7 +51,7 @@
                      <div @click="updateActiveAddition(addition)" class="pointer q-pa-md each-addition-item" :class="{active: additionActiveState(addition)}">
                         <!-- <q-img :src="product.image.url" class="q-mt-lg"></q-img> -->
                         <p class="text-body1 pointer">{{ addition.name }}</p>
-                        <p class="text-body1 text-bold text-grey-14">${{ addition.price }}</p>
+                        <p class="text-body1 text-bold text-grey-14">{{ getCurrency(addition.price) }}</p>
                      </div>
                   </slide>
                </carousel>
@@ -92,7 +92,7 @@ import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, } from 'vue3-carousel'
 import CartFab from 'components/CartFab.vue'
 import getCurrency from '../../mixins/getCurrency'
-import { uid } from 'quasar'
+import { uid, extend } from 'quasar'
 
 export default {
    name: "product-details",
@@ -140,23 +140,27 @@ export default {
    methods: {
       ...mapMutations('cart', ['ADD_TO_CART']),
       addToCart() {
-         this.ADD_TO_CART({ ...this.product, uid: uid() })
+         this.ADD_TO_CART({ ...extend(true, {}, this.product), uid: uid() })
          this.emitter.emit("toggle-sidebar", true)
       },
       setProductData() {
+
+         // console.log(extend({}, this.getProductById(this.$route.params.id)))
+
          this.product = {
-            ...this.getProductById(this.$route.params.id),
+            // ...this.getProductById(this.$route.params.id),
+            ...extend(true, {}, this.getProductById(this.$route.params.id)),
             quantity: 1,
             activeAdditions: [],
             activeOptions: []
          }
 
          if (this.product.options && this.product.options.length > 0) {
-            this.product.options.map((o, index) => {
+            this.product.options.forEach((o, index) => {
                this.product.activeOptions[index] = {
                   id: o.id,
                   name: o.name,
-                  value: o.list[0]
+                  value: { ...o.list[0] }
                }
             })
          }
@@ -165,9 +169,7 @@ export default {
          const prevOpt = this.product.activeOptions.find(o => o.id === opt.id)
 
          prevOpt.value = {
-            id: item.id,
-            name: item.name,
-            price: item.price
+            ...item
          }
       },
 
