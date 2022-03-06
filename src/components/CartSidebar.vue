@@ -6,16 +6,16 @@
          <div class="text-center" style="flex-grow: 1;">
             <q-img :src="item.image.url" spinner-color="white" style="max-height: 150px;"></q-img>
             <h6 class="q-mt-md">{{item.name}}</h6>
-            <h6>${{ item.price }}</h6>
+            <h6>${{ getTotalPerItem(item.uid) }}</h6>
          </div>
 
          <div class="q-px-sm">
             <h6 class="">
                QTY
                <span class="flex column items-center q-ml-sm">
-                  <q-icon @click="++form.quantity" name="keyboard_arrow_up" class="text-grey-14 pointer" />
-                  <span class="text-primary">{{ form.quantity }}</span>
-                  <q-icon @click="--form.quantity" name="keyboard_arrow_down" class="text-grey-14 pointer" />
+                  <q-icon @click="addQuantity(item.uid)" name="keyboard_arrow_up" class="text-grey-14 pointer" />
+                  <span class="text-primary">{{ item.quantity }}</span>
+                  <q-icon @click="removeQuantity(item.uid)" name="keyboard_arrow_down" class="text-grey-14 pointer" />
                </span>
             </h6>
          </div>
@@ -43,13 +43,19 @@ import { mapGetters } from 'vuex'
 export default {
    data() {
       return {
-         form: {
-            quantity: 0
-         }
+
       }
    },
    computed: {
-      ...mapGetters('cart', ['totalCartItems', 'cartItems'])
+      ...mapGetters('cart', ['totalCartItems', 'cartItems', 'getTotalPerItem']),
+   },
+   methods: {
+      addQuantity(uid) {
+         this.$store.commit('cart/UPDATE_QUANTITY', { mode: 'add', uid })
+      },
+      removeQuantity(uid) {
+         this.$store.commit('cart/UPDATE_QUANTITY', { mode: 'remove', uid })
+      }
    },
 }
 </script>

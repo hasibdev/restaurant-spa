@@ -92,6 +92,7 @@ import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, } from 'vue3-carousel'
 import CartFab from 'components/CartFab.vue'
 import getCurrency from '../../mixins/getCurrency'
+import { uid } from 'quasar'
 
 export default {
    name: "product-details",
@@ -139,7 +140,7 @@ export default {
    methods: {
       ...mapMutations('cart', ['ADD_TO_CART']),
       addToCart() {
-         this.ADD_TO_CART(this.product)
+         this.ADD_TO_CART({ ...this.product, uid: uid() })
          this.emitter.emit("toggle-sidebar", true)
       },
       setProductData() {
@@ -178,7 +179,7 @@ export default {
          } else {
             this.product.activeAdditions.push(addition)
          }
-      }
+      },
 
    },
 }
