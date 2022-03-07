@@ -44,15 +44,15 @@
                         <h6 class="flex items-center justiry-md-center">
                            QTY
                            <span class="flex column items-center q-ml-sm">
-                              <q-icon @click="++form.quantity" name="keyboard_arrow_up" class="text-grey-14 pointer" />
+                              <q-icon @click="addQuantity(item.uid)" name="keyboard_arrow_up" class="text-grey-14 pointer" />
                               <span class="text-primary">{{ item.quantity }}</span>
-                              <q-icon @click="--form.quantity" name="keyboard_arrow_down" class="text-grey-14 pointer" />
+                              <q-icon @click="removeQuantity(item.uid)" name="keyboard_arrow_down" class="text-grey-14 pointer" />
                            </span>
                         </h6>
                      </div>
                      <div class="col-6 col-md-4">
                         <div class="flex items-center justify-between">
-                           <h6>$6.50</h6>
+                           <h6>{{ getCurrency(getTotalPerItem(item.uid)) }}</h6>
 
                            <div>
                               <q-icon name="cancel" class="text-grey-6 pointer text-h5" />
@@ -107,9 +107,10 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex'
+import getCurrency from '../mixins/getCurrency'
 
 export default {
-
+   mixins: [getCurrency],
    data() {
       return {
          form: {
@@ -117,14 +118,22 @@ export default {
          }
       }
    },
+   computed: {
+      ...mapGetters('cart', ['cartItems', 'getTotalPerItem']),
+      ...mapState('data', ['settings'])
+   },
    mounted() {
       this.emitter.emit("toggle-sidebar", false)
    },
-
-   computed: {
-      ...mapGetters('cart', ['cartItems']),
-      ...mapState('data', ['settings'])
+   methods: {
+      addQuantity(uid) {
+         this.$store.commit('cart/UPDATE_QUANTITY', { mode: 'add', uid })
+      },
+      removeQuantity(uid) {
+         this.$store.commit('cart/UPDATE_QUANTITY', { mode: 'remove', uid })
+      }
    },
+
 
 }
 </script>

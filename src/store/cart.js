@@ -34,7 +34,8 @@ export default {
                return acc + item.value.price
             }, 0)
 
-            return (totalAddition + totalOptions + item.price) * item.quantity
+            const total = (totalAddition + totalOptions + item.price) * item.quantity
+            return total.toFixed(2)
          }
       }
    },
