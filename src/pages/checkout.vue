@@ -22,24 +22,30 @@
 
                   <div class="row items-center">
                      <div class="col-12 col-md-4 q-mb-md mb-md-none">
-                        <ul class="q-pl-none text-grey-14">
-                           <li class="flex justify-between q-mt-sm"><span>ONIONS</span>
-                              <q-icon name="close" />
-                           </li>
-                           <li class="flex justify-between q-mt-sm"><span>TOMATOS</span>
-                              <q-icon name="close" />
-                           </li>
-                           <li class="flex justify-between q-mt-sm"><span>TETTUCE</span>
-                              <q-icon name="close" />
+                        <p v-if="item.activeAdditions.length" class="q-mt-md text-bold q-mb-none">Additions</p>
+                        <ul class="q-pl-none q-mt-sm text-grey-14">
+                           <li v-for="addition in item.activeAdditions" :key="addition.id" class="flex justify-between q-mt-sm">
+                              <span>{{ addition.name }}</span>
+                              <!-- <q-icon name="close" /> -->
                            </li>
                         </ul>
+
+                        <div v-for="option in item.activeOptions" :key="option.id">
+                           <p class="q-mt-md text-bold q-mb-none">{{ option.name }}</p>
+                           <ul class="q-pl-none q-mt-sm text-grey-14">
+                              <li class="flex justify-between q-mt-sm">
+                                 <span>{{ option.value.name }}</span>
+                                 <!-- <q-icon name="close" /> -->
+                              </li>
+                           </ul>
+                        </div>
                      </div>
                      <div class="col-6 col-md-4">
                         <h6 class="flex items-center justiry-md-center">
                            QTY
                            <span class="flex column items-center q-ml-sm">
                               <q-icon @click="++form.quantity" name="keyboard_arrow_up" class="text-grey-14 pointer" />
-                              <span class="text-primary">{{ form.quantity }}</span>
+                              <span class="text-primary">{{ item.quantity }}</span>
                               <q-icon @click="--form.quantity" name="keyboard_arrow_down" class="text-grey-14 pointer" />
                            </span>
                         </h6>
