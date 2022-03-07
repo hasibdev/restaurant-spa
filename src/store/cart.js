@@ -37,7 +37,19 @@ export default {
             const total = (totalAddition + totalOptions + item.price) * item.quantity
             return total.toFixed(2)
          }
-      }
+      },
+
+      discountsTotal: (state, getters, rootState, rootGetters) => {
+         let total = 0
+         let activeOffers = rootGetters['menu/activeOffers']
+         if (activeOffers && activeOffers.length > 0) {
+            activeOffers.forEach(item => (item.type === 'DISCOUNT' ? (total += getters['productsTotal'] * parseFloat(item.discountValue)) : 0))
+         }
+         if (state.discountCoupon) {
+            total += getters['productsTotal'] * parseFloat(state.discountCoupon.value)
+         }
+         return parseFloat(total).toFixed(2)
+      },
    },
    mutations: {
       SET_DATA(state, { property, data }) {

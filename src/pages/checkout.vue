@@ -108,7 +108,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex'
+import { mapGetters, mapState, mapActions } from 'vuex'
 import getCurrency from '../mixins/getCurrency'
 
 export default {
@@ -126,8 +126,10 @@ export default {
    },
    mounted() {
       this.emitter.emit("toggle-sidebar", false)
+      this.updateOffers()
    },
    methods: {
+      ...mapActions('menu', ['updateOffers']),
       addQuantity(uid) {
          this.$store.commit('cart/UPDATE_QUANTITY', { mode: 'add', uid })
       },
