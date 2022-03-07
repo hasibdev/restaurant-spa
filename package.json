@@ -2,7 +2,7 @@
    "name": "restaurant-spa",
    "version": "0.0.1",
    "description": "A Quasar Framework app",
-   "productName": "Quasar App",
+   "productName": "Restaurant App",
    "author": "hasibdev <79460308+hasibdev@users.noreply.github.com>",
    "private": true,
    "scripts": {

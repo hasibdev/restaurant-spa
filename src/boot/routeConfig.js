@@ -4,7 +4,7 @@ import middlewarePipeline from '../middlewares/pipeline'
 
 // "async" is optional;
 // more info on params: https://v2.quasar.dev/quasar-cli/boot-files
-export default boot(async ({ router }) => {
+export default boot(async ({ router, store }) => {
    // something to do
    router.beforeEach((to, from, next) => {
       if (!to.meta.middleware) {
@@ -12,7 +12,7 @@ export default boot(async ({ router }) => {
       }
       const middleware = Array.isArray(to.meta.middleware) ? to.meta.middleware : [to.meta.middleware]
 
-      const context = { to, from, next, router }
+      const context = { to, from, next, router, store }
 
       return middleware[0]({
          ...context,

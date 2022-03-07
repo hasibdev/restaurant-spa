@@ -17,7 +17,8 @@ import cart from './cart'
 export default store(function (/* { ssrContext } */) {
    const Store = createStore({
       modules: {
-         data, cart
+         data,
+         cart
       },
 
       // enable strict mode (adds overhead!)
