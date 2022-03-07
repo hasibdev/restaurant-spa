@@ -53,6 +53,9 @@ export default {
          } else {
             --prevItem.quantity
          }
+      },
+      REMOVE_CART_ITEM(state, uid) {
+         state.cart = state.cart.filter(c => c.uid !== uid)
       }
    },
    actions: {

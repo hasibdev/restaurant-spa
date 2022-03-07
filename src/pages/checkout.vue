@@ -13,6 +13,8 @@
                </h4>
             </div>
 
+            <p v-if="!hasCartItem">No Cart Item found.</p>
+
             <div v-for="item in cartItems" :key="item.id" class="row">
                <div class="col-12 col-sm-4 q-pa-md">
                   <q-img :src="item.image.url" class="q-mt-lg"></q-img>
@@ -55,7 +57,7 @@
                            <h6>{{ getCurrency(getTotalPerItem(item.uid)) }}</h6>
 
                            <div>
-                              <q-icon name="cancel" class="text-grey-6 pointer text-h5" />
+                              <q-icon @click="removeCartItem(item.uid)" name="cancel" class="text-grey-6 pointer text-h5" />
                            </div>
                         </div>
                      </div>
@@ -76,7 +78,7 @@
             <ul class="q-pa-lg bg-grey-3 q-mt-md">
                <li class="flex justify-between q-mt-sm text-body1">
                   <span>SUB TOTAL</span>
-                  <span class="text-bold">$17.00</span>
+                  <span class="text-bold">{{ getCartTotal }}</span>
                </li>
                <li class="flex justify-between q-mt-sm text-body1">
                   <span>TAX [{{ settings.tax }}%]</span>
@@ -119,7 +121,7 @@ export default {
       }
    },
    computed: {
-      ...mapGetters('cart', ['cartItems', 'getTotalPerItem']),
+      ...mapGetters('cart', ['cartItems', 'hasCartItem', 'getTotalPerItem', 'getCartTotal']),
       ...mapState('data', ['settings'])
    },
    mounted() {
@@ -131,6 +133,9 @@ export default {
       },
       removeQuantity(uid) {
          this.$store.commit('cart/UPDATE_QUANTITY', { mode: 'remove', uid })
+      },
+      removeCartItem(uid) {
+         this.$store.commit('cart/REMOVE_CART_ITEM', uid)
       }
    },
 
