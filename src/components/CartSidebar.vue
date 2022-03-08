@@ -1,6 +1,7 @@
 <template>
    <div class="q-pa-md">
       <h6 class="text-center text-grey-14 q-mt-sm border-b">MY CART ({{totalCartItems}})</h6>
+      <p @click="clearCart" class="pointer text-right text-primary">Clear</p>
 
       <div v-for="item in cartItems" :key="item.id" class="flex justify-between q-mt-lg">
          <div class="text-center" style="flex-grow: 1;">
@@ -57,6 +58,10 @@ export default {
       },
       removeQuantity(uid) {
          this.$store.commit('cart/UPDATE_QUANTITY', { mode: 'remove', uid })
+      },
+      clearCart() {
+         this.$store.commit('cart/CLEAR_CART')
+         this.emitter.emit("toggle-sidebar", false)
       }
    },
 }

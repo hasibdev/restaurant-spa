@@ -18,8 +18,8 @@ export default {
       },
       getCartTotal(state, getters) {
          return state.cart.reduce((acc, item) => {
-            return acc + getters.getTotalPerItem(item.uid)
-         }, 0)
+            return acc += parseFloat(getters.getTotalPerItem(item.uid))
+         }, 0).toFixed(2)
       },
       getTotalPerItem(state) {
          return uid => {
@@ -57,6 +57,7 @@ export default {
       },
       ADD_TO_CART(state, data) {
          state.cart.push({ ...data })
+         localStorage.setItem('cart', JSON.stringify(state.cart))
       },
       UPDATE_QUANTITY(state, { mode, uid }) {
          const prevItem = state.cart.find(c => c.uid === uid)
@@ -65,12 +66,23 @@ export default {
          } else {
             --prevItem.quantity
          }
+         localStorage.setItem('cart', JSON.stringify(state.cart))
       },
       REMOVE_CART_ITEM(state, uid) {
          state.cart = state.cart.filter(c => c.uid !== uid)
+         localStorage.setItem('cart', JSON.stringify(state.cart))
+      },
+
+      CLEAR_CART(state) {
+         state.cart = []
+         localStorage.setItem('cart', JSON.stringify(state.cart))
       }
+
    },
    actions: {
-
+      retriveLocalCart({ commit }) {
+         const data = JSON.parse(localStorage.getItem('cart'))
+         commit('SET_DATA', { property: 'cart', data })
+      }
    },
 }

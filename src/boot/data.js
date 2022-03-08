@@ -5,4 +5,5 @@ import { boot } from 'quasar/wrappers'
 export default boot(async ({ store }) => {
    await store.dispatch('data/fetchData')
    await store.dispatch('menu/fetchOffers')
+   await store.dispatch('cart/retriveLocalCart')
 })

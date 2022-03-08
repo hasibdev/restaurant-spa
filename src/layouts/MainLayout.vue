@@ -27,6 +27,12 @@ export default {
 
 
    mounted() {
+      // Open sidebar on confition of screen and cart item
+      if (this.$q.screen.gt.sm && this.$store.state.cart.cart.length) {
+         this.rightDrawerOpen = true
+      }
+
+      // Register global event for toggle cart sidebar
       this.emitter.on("toggle-sidebar", isOpen => {
          this.rightDrawerOpen = isOpen
       })
