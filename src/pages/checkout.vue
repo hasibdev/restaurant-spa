@@ -75,6 +75,34 @@
                </router-link>
             </h4>
 
+            <!-- Order Info -->
+            <div>
+               <h6 class="q-mt-md">Order Type</h6>
+               <div>
+                  <q-radio v-model="checkoutPrototype.orderType" val="DELIVERY" label="Delivery" />
+                  <q-radio v-model="checkoutPrototype.orderType" val="PICKUP" label="Click & Collect" class="q-ml-md" />
+               </div>
+
+               <h6 class="q-mt-md">Basic informations</h6>
+               <div>
+                  <q-input stack-label outlined v-model="checkoutPrototype.name" label="Full Name" class="q-mt-sm" />
+                  <q-select stack-label outlined v-model="checkoutPrototype.deliveryArea" :options="deliveryAreas" option-label="city" option-value="city" label="Delivery Area" class="q-mt-sm" />
+                  <q-input stack-label outlined v-model="checkoutPrototype.name" label="Zip Code" class="q-mt-sm" />
+                  <q-input stack-label outlined v-model="checkoutPrototype.name" label="Street and number" class="q-mt-sm" />
+                  <q-input stack-label outlined v-model="checkoutPrototype.name" label="Phone" class="q-mt-sm" />
+                  <q-input stack-label outlined v-model="checkoutPrototype.name" label="E-mail" type="email" class="q-mt-sm" />
+               </div>
+            </div>
+
+            <p class="q-mt-md">*Your order will be ready in 35-45 minutes</p>
+
+            <h6 class="q-mt-md">Payment</h6>
+            <div>
+               <q-radio v-model="checkoutPrototype.paymentMethod" val="CARD" label="Card" />
+               <q-radio v-model="checkoutPrototype.paymentMethod" val="CASH" label="Cash" class="q-ml-md" />
+            </div>
+
+            <!-- Total, Tax, Discounts -->
             <ul class="q-pa-lg bg-grey-3 q-mt-md">
                <li class="flex justify-between q-mt-sm text-body1">
                   <span>SUB TOTAL</span>
@@ -115,14 +143,16 @@ export default {
    mixins: [getCurrency],
    data() {
       return {
-         form: {
-            quantity: 1
+         checkoutPrototype: {
+            orderType: '',
+            name: ''
          }
       }
    },
    computed: {
       ...mapGetters('cart', ['cartItems', 'hasCartItem', 'getTotalPerItem', 'getCartTotal', 'tax', 'discountsTotal']),
-      ...mapState('data', ['settings'])
+      ...mapState('data', ['settings']),
+      ...mapGetters('data', ['deliveryAreas'])
    },
    mounted() {
       this.emitter.emit("toggle-sidebar", false)

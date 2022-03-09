@@ -13,7 +13,8 @@ export default {
    },
    getters: {
       getProductById: state => id => state.products.find(p => p.id == id),
-      getTax: state => state.settings.tax
+      getTax: state => state.settings.tax,
+      deliveryAreas: state => state.settings.deliveryAreas
    },
    mutations: {
       SET_DATA(state, { property, data }) {
