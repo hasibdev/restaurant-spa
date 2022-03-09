@@ -9,6 +9,7 @@ const routes = [
          { path: '/products/:id', component: () => import('pages/products/details.vue') },
          {
             path: '/checkout',
+            name: 'checkout',
             component: () => import('pages/checkout.vue'),
             meta: {
                middleware: [checkout]
