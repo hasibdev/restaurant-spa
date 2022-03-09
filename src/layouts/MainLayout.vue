@@ -29,10 +29,12 @@ export default {
    mounted() {
       // Register global event for toggle cart sidebar
       this.emitter.on("toggle-sidebar", isOpen => {
-         this.rightDrawerOpen = isOpen
+         if (isOpen === undefined) {
+            this.rightDrawerOpen = !this.rightDrawerOpen
+         } else {
+            this.rightDrawerOpen = isOpen
+         }
       })
-
-      console.log(this.$route)
 
       // Open sidebar on confition of screen and cart item
       if (this.$q.screen.gt.sm && this.$store.state.cart.cart.length && this.$route.name !== 'checkout') {

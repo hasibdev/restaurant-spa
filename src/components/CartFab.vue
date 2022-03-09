@@ -1,5 +1,5 @@
 <template>
-   <q-page-sticky v-if="totalCartItems" class="d-md-none" position="bottom-right" :offset="[20, 20]">
+   <q-page-sticky v-if="totalCartItems > 0" position="bottom-right" :offset="[20, 20]">
       <q-btn fab @click="openCartbar" icon="shopping_cart" color="primary">
          <q-badge color="red" floating>{{ totalCartItems }}</q-badge>
       </q-btn>
@@ -14,7 +14,7 @@ export default {
    },
    methods: {
       openCartbar() {
-         this.emitter.emit("toggle-sidebar", true)
+         this.emitter.emit("toggle-sidebar")
       }
    },
 }
