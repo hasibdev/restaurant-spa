@@ -37,9 +37,9 @@ export default {
       })
 
       // Open sidebar on confition of screen and cart item
-      if (this.$q.screen.gt.sm && this.$store.state.cart.cart.length && this.$route.name !== 'checkout') {
-         this.emitter.emit("toggle-sidebar", true)
-      }
+      // if (this.$q.screen.gt.sm && this.$store.state.cart.cart.length && this.$route.name !== 'checkout') {
+      //    this.emitter.emit("toggle-sidebar", true)
+      // }
 
    },
 }
