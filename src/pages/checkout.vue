@@ -78,15 +78,15 @@
             <ul class="q-pa-lg bg-grey-3 q-mt-md">
                <li class="flex justify-between q-mt-sm text-body1">
                   <span>SUB TOTAL</span>
-                  <span class="text-bold">{{ getCartTotal }}</span>
+                  <span class="text-bold">{{ getCurrency(getCartTotal) }}</span>
                </li>
                <li class="flex justify-between q-mt-sm text-body1">
                   <span>TAX [{{ settings.tax }}%]</span>
-                  <span class="text-bold">$2.36</span>
+                  <span class="text-bold">{{ getCurrency(tax) }}</span>
                </li>
                <li class="flex justify-between q-mt-sm text-body1">
-                  <span>SERVICE CHARGE</span>
-                  <span class="text-bold">$5.00</span>
+                  <span>DISCOUNTS TOTAL</span>
+                  <span class="text-bold">{{ getCurrency(discountsTotal) }}</span>
                </li>
             </ul>
 
@@ -121,7 +121,7 @@ export default {
       }
    },
    computed: {
-      ...mapGetters('cart', ['cartItems', 'hasCartItem', 'getTotalPerItem', 'getCartTotal']),
+      ...mapGetters('cart', ['cartItems', 'hasCartItem', 'getTotalPerItem', 'getCartTotal', 'tax', 'discountsTotal']),
       ...mapState('data', ['settings'])
    },
    mounted() {

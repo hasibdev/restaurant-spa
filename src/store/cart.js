@@ -3,7 +3,8 @@ export default {
    namespaced: true,
    state: function () {
       return {
-         cart: []
+         cart: [],
+         discountCoupon: null
       }
    },
    getters: {
@@ -43,13 +44,21 @@ export default {
          let total = 0
          let activeOffers = rootGetters['menu/activeOffers']
          if (activeOffers && activeOffers.length > 0) {
-            activeOffers.forEach(item => (item.type === 'DISCOUNT' ? (total += getters['productsTotal'] * parseFloat(item.discountValue)) : 0))
+            activeOffers.forEach(item => (item.type === 'DISCOUNT' ? (total += getters['getCartTotal'] * parseFloat(item.discountValue)) : 0))
          }
          if (state.discountCoupon) {
             total += getters['productsTotal'] * parseFloat(state.discountCoupon.value)
          }
          return parseFloat(total).toFixed(2)
       },
+      tax: (state, getters, rootState, rootGetters) => {
+         let percent = parseFloat(rootGetters['data/getTax'])
+         percent = percent / 100
+         return parseFloat(parseFloat(getters['getCartTotal']) * percent).toFixed(2)
+      },
+
+      // deliveryCost: state => (state.checkout && state.checkout.deliveryArea ? parseFloat(state.checkout.deliveryArea.deliveryCost) : 0),
+      // orderTotal: (state, getters) => parseFloat(getters.getCartTotal) + parseFloat(getters.deliveryCost) - parseFloat(getters.discountsTotal),
    },
    mutations: {
       SET_DATA(state, { property, data }) {
