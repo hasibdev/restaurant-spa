@@ -60,6 +60,9 @@ input:focus {
 .d-none {
    display: none;
 }
+.border-bottom {
+   border-bottom: 1px solid $grey;
+}
 
 // Amination delay
 @for $i from 1 through 20 {
@@ -101,6 +104,9 @@ input:focus {
    .d-md-none {
       display: none;
    }
+.order-md-first {
+   order: -1;
+}
 }
 
 // Small Device

@@ -15,33 +15,15 @@
 
             <p v-if="!hasCartItem">No Cart Item found.</p>
 
-            <div v-for="item in cartItems" :key="item.id" class="row">
-               <div class="col-12 col-sm-4 q-pa-md">
-                  <q-img :src="item.image.url" class="q-mt-lg"></q-img>
+            <div v-for="(item, i) in cartItems" :key="item.id" :class="{'border-bottom': ++i < cartItems.length}" class="row q-py-md">
+               <div class="col-12 col-sm-4 ">
+                  <q-img :src="item.image.url" style="max-height: 120px"></q-img>
                </div>
-               <div class="col-12 col-sm-8 q-pl-md">
+               <div class="col-12 col-sm-8 q-pl-lg">
                   <h6>{{ item.name }}</h6>
 
                   <div class="row items-center">
-                     <div class="col-12 col-md-4 q-mb-md mb-md-none">
-                        <p v-if="item.activeAdditions.length" class="q-mt-md text-bold q-mb-none">Additions</p>
-                        <ul class="q-pl-none q-mt-sm text-grey-14">
-                           <li v-for="addition in item.activeAdditions" :key="addition.id" class="flex justify-between q-mt-sm">
-                              <span>{{ addition.name }}</span>
-                              <!-- <q-icon name="close" /> -->
-                           </li>
-                        </ul>
 
-                        <div v-for="option in item.activeOptions" :key="option.id">
-                           <p class="q-mt-md text-bold q-mb-none">{{ option.name }}</p>
-                           <ul class="q-pl-none q-mt-sm text-grey-14">
-                              <li class="flex justify-between q-mt-sm">
-                                 <span>{{ option.value.name }}</span>
-                                 <!-- <q-icon name="close" /> -->
-                              </li>
-                           </ul>
-                        </div>
-                     </div>
                      <div class="col-6 col-md-4">
                         <h6 class="flex items-center justiry-md-center">
                            QTY
@@ -61,6 +43,27 @@
                            </div>
                         </div>
                      </div>
+
+                     <div class="col-12 order-md-first col-md-4 q-mb-md mb-md-none">
+                        <p v-if="item.activeAdditions.length" class="q-mt-md text-bold q-mb-none">Additions</p>
+                        <ul class="q-pl-none q-mt-sm text-grey-14">
+                           <li v-for="addition in item.activeAdditions" :key="addition.id" class="flex justify-between q-mt-sm">
+                              <span>{{ addition.name }}</span>
+                              <!-- <q-icon name="close" /> -->
+                           </li>
+                        </ul>
+
+                        <div v-for="option in item.activeOptions" :key="option.id">
+                           <p class="q-mt-md text-bold q-mb-none">{{ option.name }}</p>
+                           <ul class="q-pl-none q-mt-sm text-grey-14">
+                              <li class="flex justify-between q-mt-sm">
+                                 <span>{{ option.value.name }}</span>
+                                 <!-- <q-icon name="close" /> -->
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+
                   </div>
 
                </div>
@@ -85,12 +88,18 @@
 
                <h6 class="q-mt-md">Basic informations</h6>
                <div>
+                  <!-- Full Name -->
                   <q-input stack-label outlined v-model="checkoutPrototype.name" label="Full Name" class="q-mt-sm" />
-                  <q-select stack-label outlined v-model="checkoutPrototype.deliveryArea" :options="deliveryAreas" option-label="city" option-value="city" label="Delivery Area" class="q-mt-sm" />
-                  <q-input stack-label outlined v-model="checkoutPrototype.name" label="Zip Code" class="q-mt-sm" />
-                  <q-input stack-label outlined v-model="checkoutPrototype.name" label="Street and number" class="q-mt-sm" />
-                  <q-input stack-label outlined v-model="checkoutPrototype.name" label="Phone" class="q-mt-sm" />
-                  <q-input stack-label outlined v-model="checkoutPrototype.name" label="E-mail" type="email" class="q-mt-sm" />
+                  <!-- Delivery Areas -->
+                  <q-select v-if="ifDelevery" stack-label outlined v-model="checkoutPrototype.deliveryArea" :options="deliveryAreas" option-label="city" option-value="city" label="Delivery Area" class="q-mt-sm" />
+                  <!-- Zip Code -->
+                  <q-input v-if="ifDelevery" stack-label outlined v-model="checkoutPrototype.zipCode" label="Zip Code" class="q-mt-sm" />
+                  <!-- Street -->
+                  <q-input v-if="ifDelevery" stack-label outlined v-model="checkoutPrototype.street" label="Street and number" class="q-mt-sm" />
+                  <!-- Phone -->
+                  <q-input stack-label outlined v-model="checkoutPrototype.phone" label="Phone" class="q-mt-sm" />
+                  <!-- Email -->
+                  <q-input stack-label outlined v-model="checkoutPrototype.email" label="E-mail" type="email" class="q-mt-sm" />
                </div>
             </div>
 
@@ -144,15 +153,24 @@ export default {
    data() {
       return {
          checkoutPrototype: {
-            orderType: '',
-            name: ''
+            orderType: 'PICKUP',
+            name: '',
+            deliveryArea: '',
+            zipCode: '',
+            street: '',
+            phone: '',
+            email: '',
+            paymentMethod: 'CASH',
          }
       }
    },
    computed: {
       ...mapGetters('cart', ['cartItems', 'hasCartItem', 'getTotalPerItem', 'getCartTotal', 'tax', 'discountsTotal']),
       ...mapState('data', ['settings']),
-      ...mapGetters('data', ['deliveryAreas'])
+      ...mapGetters('data', ['deliveryAreas']),
+      ifDelevery() {
+         return this.checkoutPrototype.orderType === 'DELIVERY'
+      }
    },
    mounted() {
       this.emitter.emit("toggle-sidebar", false)
