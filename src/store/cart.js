@@ -91,7 +91,11 @@ export default {
    actions: {
       retriveLocalCart({ commit }) {
          const data = JSON.parse(localStorage.getItem('cart'))
-         commit('SET_DATA', { property: 'cart', data })
+         if (data) {
+            commit('SET_DATA', { property: 'cart', data })
+         } else {
+            commit('SET_DATA', { property: 'cart', data: [] })
+         }
       }
    },
 }
