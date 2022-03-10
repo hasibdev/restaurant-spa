@@ -55,7 +55,7 @@
 
                         <div v-for="option in item.activeOptions" :key="option.id">
                            <p class="q-mt-md text-bold q-mb-none">{{ option.name }}</p>
-                           <ul class="q-pl-none q-mt-sm text-grey-14">
+                           <ul class="q-pl-none q-mt-none text-grey-14">
                               <li class="flex justify-between q-mt-sm">
                                  <span>{{ option.value.name }}</span>
                                  <!-- <q-icon name="close" /> -->
@@ -82,8 +82,8 @@
             <div>
                <h6 class="q-mt-md">Order Type</h6>
                <div>
+                  <q-radio v-model="checkoutPrototype.orderType" val="PICKUP" label="Click & Collect" class="q-mr-md" />
                   <q-radio v-model="checkoutPrototype.orderType" val="DELIVERY" label="Delivery" />
-                  <q-radio v-model="checkoutPrototype.orderType" val="PICKUP" label="Click & Collect" class="q-ml-md" />
                </div>
 
                <h6 class="q-mt-md">Basic informations</h6>
@@ -107,8 +107,8 @@
 
             <h6 class="q-mt-md">Payment</h6>
             <div>
+               <q-radio v-model="checkoutPrototype.paymentMethod" val="CASH" label="Cash" class="q-mr-md" />
                <q-radio v-model="checkoutPrototype.paymentMethod" val="CARD" label="Card" />
-               <q-radio v-model="checkoutPrototype.paymentMethod" val="CASH" label="Cash" class="q-ml-md" />
             </div>
 
             <!-- Total, Tax, Discounts -->
@@ -121,23 +121,23 @@
                   <span>TAX [{{ settings.tax }}%]</span>
                   <span class="text-bold">{{ getCurrency(tax) }}</span>
                </li>
-               <li class="flex justify-between q-mt-sm text-body1">
+               <li v-if="discountsTotal > 0" class="flex justify-between q-mt-sm text-body1">
                   <span>DISCOUNTS TOTAL</span>
-                  <span class="text-bold">{{ getCurrency(discountsTotal) }}</span>
+                  <span class="text-bold">-{{ getCurrency(discountsTotal) }}</span>
                </li>
             </ul>
 
             <h5 class="flex justify-between q-mt-xl">
                <span class="text-grey-6">TOTAL</span>
-               <strong class="text-grey-8">$24.36</strong>
+               <strong class="text-grey-8">{{ getCurrency(orderTotal) }}</strong>
             </h5>
 
             <!-- Empty space -->
             <div style="height: 140px;"></div>
 
             <div class="text-center sidebar-bottom-content">
-               <q-btn color="primary" class="full-width q-py-md text-body1">PAY</q-btn>
-               <input class="q-py-md full-width q-pa-md no-border" placeholder="ENTER COUPON" />
+               <input v-model="discountCoupon" class="q-py-md full-width q-pa-md no-border" placeholder="ENTER COUPON" />
+               <q-btn @click="placeOrder" color="primary" class="full-width q-py-md text-body1">Place Order</q-btn>
             </div>
          </div>
       </div>
@@ -147,7 +147,7 @@
 <script>
 import { mapGetters, mapState, mapActions } from 'vuex'
 import getCurrency from '../mixins/getCurrency'
-
+// import { QSpinnerGears } from 'quasar'
 export default {
    mixins: [getCurrency],
    data() {
@@ -161,13 +161,15 @@ export default {
             phone: '',
             email: '',
             paymentMethod: 'CASH',
-         }
+         },
+         discountCoupon: ''
       }
    },
    computed: {
-      ...mapGetters('cart', ['cartItems', 'hasCartItem', 'getTotalPerItem', 'getCartTotal', 'tax', 'discountsTotal']),
+      ...mapGetters('cart', ['cartItems', 'hasCartItem', 'getTotalPerItem', 'getCartTotal', 'tax', 'discountsTotal', 'orderTotal', 'freeProducts', 'deliveryCost']),
       ...mapState('data', ['settings']),
-      ...mapGetters('data', ['deliveryAreas']),
+      ...mapGetters('data', ['deliveryAreas', 'currency']),
+      ...mapGetters('menu', ['activeOffers']),
       ifDelevery() {
          return this.checkoutPrototype.orderType === 'DELIVERY'
       }
@@ -186,11 +188,61 @@ export default {
       },
       removeCartItem(uid) {
          this.$store.commit('cart/REMOVE_CART_ITEM', uid)
+      },
+      async placeOrder() {
+         const token = null
+
+         const freeProducts = this.freeProducts.slice()
+
+         let newItems = [...this.cartItems, ...freeProducts]
+         const data = {
+            object: {
+               ...this.checkoutPrototype,
+               activeOffersIds: this.activeOffers && this.activeOffers.length > 0 ? this.activeOffers.map(o => o.id) : null,
+               discountCoupon: this.discountCoupon || null,
+               stripe: token || null,
+               currency: this.currency,
+               items: newItems.map(i => {
+                  return {
+                     id: i.id,
+                     name: i.name,
+                     description: i.description,
+                     categoryId: i.categoryId,
+                     additions: i.activeAdditions,
+                     options: i.activeOptions,
+                     price: parseFloat(i.price).toFixed(2),
+                     addition_price: parseFloat(i.totalAdditions || 0).toFixed(2),
+                     option_price: parseFloat(i.totalOptions || 0).toFixed(2),
+                     total: parseFloat(parseFloat(i.totalPrice) * parseInt(i.quantity || 1)).toFixed(2),
+                     quantity: i.quantity || 1,
+                     note: i.other
+                  }
+               }),
+               discountAmount: this.discountsTotal,
+               total: this.orderTotal,
+               tax: this.tax,
+               deliveryCost: this.deliveryCost,
+               productsTotal: this.getCartTotal,
+               customerId: null,
+               orderFrom: 'web'
+            }
+         }
+
+         try {
+            // this.$q.notify({
+            //    spinner: QSpinnerGears,
+            //    message: 'Working...',
+            //    timeout: 2000
+            // })
+            const res = await this.$api.post('/checkout/order', data)
+         } catch (error) {
+            console.log(error)
+         }
+         console.log(data)
       }
-   },
-
-
+   }
 }
+
 </script>
 
 <style lang="scss" scoped>

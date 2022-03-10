@@ -12,9 +12,28 @@ export default {
       }
    },
    getters: {
+      products: state => state.products,
       getProductById: state => id => state.products.find(p => p.id == id),
       getTax: state => state.settings.tax,
-      deliveryAreas: state => state.settings.deliveryAreas
+      deliveryAreas: state => state.settings.deliveryAreas,
+      currency: state => state.settings.currency,
+      freeProducts: (state, getters, rootState, rootGetters) => {
+         let activeOffers = rootGetters['menu/activeOffers']
+         let free_products = []
+         console.log(activeOffers)
+
+         if (activeOffers && activeOffers.length > 0) {
+            activeOffers.forEach(item => {
+               if (item.type === 'FREE_PRODUCT') {
+                  let free_product = getters['products'].filter(product => product.id === item.freeProductId)
+                  if (free_product && free_product.length > 0) {
+                     free_products = [...free_products, ...free_product]
+                  }
+               }
+            })
+         }
+         return free_products
+      },
    },
    mutations: {
       SET_DATA(state, { property, data }) {

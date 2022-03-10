@@ -4,7 +4,7 @@ export default {
    state: function () {
       return {
          cart: [],
-         discountCoupon: null
+         discountCoupon: null,
       }
    },
    getters: {
@@ -47,10 +47,28 @@ export default {
             activeOffers.forEach(item => (item.type === 'DISCOUNT' ? (total += getters['getCartTotal'] * parseFloat(item.discountValue)) : 0))
          }
          if (state.discountCoupon) {
-            total += getters['productsTotal'] * parseFloat(state.discountCoupon.value)
+            total += getters['getCartTotal'] * parseFloat(state.discountCoupon.value)
          }
          return parseFloat(total).toFixed(2)
       },
+
+      freeProducts: (state, getters, rootState, rootGetters) => {
+         let activeOffers = rootGetters['menu/activeOffers']
+         let free_products = []
+
+         if (activeOffers && activeOffers.length > 0) {
+            activeOffers.forEach(item => {
+               if (item.type === 'FREE_PRODUCT') {
+                  let free_product = rootGetters['data/products'].filter(product => product.id === item.freeProductId)
+                  if (free_product && free_product.length > 0) {
+                     free_products = [...free_products, ...free_product]
+                  }
+               }
+            })
+         }
+         return free_products
+      },
+
       tax: (state, getters, rootState, rootGetters) => {
          let percent = parseFloat(rootGetters['data/getTax'])
          percent = percent / 100
@@ -58,7 +76,9 @@ export default {
       },
 
       // deliveryCost: state => (state.checkout && state.checkout.deliveryArea ? parseFloat(state.checkout.deliveryArea.deliveryCost) : 0),
-      // orderTotal: (state, getters) => parseFloat(getters.getCartTotal) + parseFloat(getters.deliveryCost) - parseFloat(getters.discountsTotal),
+      // Delivery cost is temp
+      deliveryCost: state => 0,
+      orderTotal: (state, getters) => parseFloat(getters.getCartTotal) + parseFloat(getters.deliveryCost) - parseFloat(getters.discountsTotal),
    },
    mutations: {
       SET_DATA(state, { property, data }) {
