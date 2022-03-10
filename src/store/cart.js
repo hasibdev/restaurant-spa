@@ -104,7 +104,7 @@ export default {
 
       CLEAR_CART(state) {
          state.cart = []
-         localStorage.setItem('cart', JSON.stringify(state.cart))
+         localStorage.setItem('cart', JSON.stringify([]))
       }
 
    },

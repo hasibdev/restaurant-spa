@@ -137,7 +137,10 @@
 
             <div class="text-center sidebar-bottom-content">
                <input v-model="discountCoupon" class="q-py-md full-width q-pa-md no-border" placeholder="ENTER COUPON" />
-               <q-btn @click="placeOrder" color="primary" class="full-width q-py-md text-body1">Place Order</q-btn>
+               <q-btn @click="placeOrder" :disable="submitting" color="primary" class="full-width q-py-md text-body1">
+                  <span v-if="submitting">Please wait...</span>
+                  <span v-else>Place Order</span>
+               </q-btn>
             </div>
          </div>
       </div>
@@ -162,7 +165,8 @@ export default {
             email: '',
             paymentMethod: 'CASH',
          },
-         discountCoupon: ''
+         discountCoupon: '',
+         submitting: false
       }
    },
    computed: {
@@ -229,16 +233,20 @@ export default {
          }
 
          try {
-            // this.$q.notify({
-            //    spinner: QSpinnerGears,
-            //    message: 'Working...',
-            //    timeout: 2000
-            // })
-            const res = await this.$api.post('/checkout/order', data)
+            this.submitting = true
+
+            await this.$api.post('/checkout/order', data)
+
+            console.log('Order Success')
+
+            this.$store.commit('cart/CLEAR_CART')
+            this.$router.push('/')
          } catch (error) {
             console.log(error)
+            console.log('Order Fail')
+         } finally {
+            this.submitting = false
          }
-         console.log(data)
       }
    }
 }
