@@ -7,5 +7,7 @@ export const emitter = mitt()
 export default boot(async ({ app }) => {
    // something to do
    app.config.globalProperties.emitter = emitter
+
+   // Notification
 })
 

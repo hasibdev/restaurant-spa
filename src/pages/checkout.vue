@@ -150,7 +150,8 @@
 <script>
 import { mapGetters, mapState, mapActions } from 'vuex'
 import getCurrency from '../mixins/getCurrency'
-// import { QSpinnerGears } from 'quasar'
+import { QSpinnerGears } from 'quasar'
+
 export default {
    mixins: [getCurrency],
    data() {
@@ -232,20 +233,31 @@ export default {
             }
          }
 
+         const waitNotification = this.$q.notify({
+            spinner: QSpinnerGears,
+            message: 'Please Wait...',
+         })
          try {
             this.submitting = true
 
             await this.$api.post('/checkout/order', data)
 
-            console.log('Order Success')
-
             this.$store.commit('cart/CLEAR_CART')
             this.$router.push('/')
+            this.$q.notify({
+               color: 'primary',
+               message: 'Order Success',
+               timeout: 3000
+            })
          } catch (error) {
             console.log(error)
-            console.log('Order Fail')
+            this.$q.notify({
+               message: 'Order Fail',
+               timeout: 3000
+            })
          } finally {
             this.submitting = false
+            waitNotification()
          }
       }
    }

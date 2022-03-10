@@ -94,9 +94,11 @@ module.exports = configure(function (ctx) {
       // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
       framework: {
          // Quasar plugins
-         plugins: [],
+         plugins: ['LoadingBar', 'Notify'],
          config: {
-
+            loadingBar: {
+               color: '#72b63b'
+            }
          },
 
          // iconSet: 'material-icons', // Quasar icon set
