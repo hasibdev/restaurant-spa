@@ -26,13 +26,13 @@
 
                <q-btn-dropdown color="primary" label="Filter" dropdown-icon="las la-sliders-h">
                   <q-list>
-                     <q-item clickable v-close-popup @click="onItemClick">
+                     <q-item clickable v-close-popup @click="filterProducts('lowest')">
                         <q-item-section>
                            <q-item-label>Lowest price</q-item-label>
                         </q-item-section>
                      </q-item>
 
-                     <q-item clickable v-close-popup @click="onItemClick">
+                     <q-item clickable v-close-popup @click="filterProducts('highest')">
                         <q-item-section>
                            <q-item-label>Highest price</q-item-label>
                         </q-item-section>
@@ -92,6 +92,14 @@ export default defineComponent({
       hideWelcome() {
          this.$store.commit('data/SET_DATA', { property: 'showWelcome', data: false })
       },
+      filterProducts(value) {
+         if (value === 'lowest') {
+            this.displayProducts = this.displayProducts.sort((a, b) => a.price - b.price)
+         }
+         if (value === 'highest') {
+            this.displayProducts = this.displayProducts.sort((a, b) => b.price - a.price)
+         }
+      }
    },
    created() {
       this.selectedCategory = this.categories[0]
