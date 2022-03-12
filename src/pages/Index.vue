@@ -4,7 +4,7 @@
       <!-- Welcome Overlay -->
       <welcome-overlay />
 
-      <div v-if="!showWelcome" class="row">
+      <div v-if="!showWelcome" class="row page-row">
          <!-- Left Content -->
          <div class="col-4 col-md-3 border-right">
             <p class="bg-grey-2 text-grey-14 q-pa-md" style="font-size: 18px;">Categories</p>
@@ -12,7 +12,8 @@
                <transition appear :enter-active-class="`animated fadeIn delay-${i+1}`" v-for="(cat, i) in categories" :key="cat.id">
                   <div @click="selectedCategory = cat" :class="{'active-category': selectedCategory.id === cat.id}" class="relative-position category-item q-mt-md text-center pointer">
                      <q-img :src="cat.image.url" spinner-color="white" style="max-height: 160px;"></q-img>
-                     <p class="text-body1 category-name">{{ cat.name }}</p>
+                     <p class="text-body1 xs-hide category-name ellipsis">{{ cat.name }}</p>
+                     <p class="text-body1 sm-hide q-mt-sm ellipsis">{{ cat.name }}</p>
                   </div>
                </transition>
             </div>
@@ -49,7 +50,7 @@
                            <q-img :src="product.image.url" spinner-color="white"></q-img>
 
                            <q-card-section class="q-pa-sm">
-                              <p class="q-mt-sm text-grey-9 text-body1 text-bold text-italic ">{{ product.name }}</p>
+                              <p class="q-mt-sm text-grey-9 text-body1 text-bold text-italic ellipsis">{{ product.name }}</p>
 
                               <span class="price-fab">{{ getCurrency(product.price) }}</span>
                            </q-card-section>
@@ -107,6 +108,11 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.page-row {
+   height: 100vh;
+   overflow: hidden;
+}
+
 .right-content-header {
    padding: 11px 25px;
 }
