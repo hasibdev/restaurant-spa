@@ -23,33 +23,37 @@
             <div class="bg-grey-2 text-grey-14 flex justify-between items-center right-content-header">
                <p style="font-size: 18px;">Products - <strong>{{ selectedCategory.name }}</strong></p>
 
-               <div>
-                  <q-btn-dropdown color="primary" label="Filter" dropdown-icon="las la-sliders-h">
-                     <q-list>
-                        <q-item clickable v-close-popup @click="onItemClick">
-                           <q-item-section>
-                              <q-item-label>Lowest price</q-item-label>
-                           </q-item-section>
-                        </q-item>
+               <q-btn-dropdown color="primary" label="Filter" dropdown-icon="las la-sliders-h">
+                  <q-list>
+                     <q-item clickable v-close-popup @click="onItemClick">
+                        <q-item-section>
+                           <q-item-label>Lowest price</q-item-label>
+                        </q-item-section>
+                     </q-item>
 
-                        <q-item clickable v-close-popup @click="onItemClick">
-                           <q-item-section>
-                              <q-item-label>Highest price</q-item-label>
-                           </q-item-section>
-                        </q-item>
-                     </q-list>
-                  </q-btn-dropdown>
-               </div>
+                     <q-item clickable v-close-popup @click="onItemClick">
+                        <q-item-section>
+                           <q-item-label>Highest price</q-item-label>
+                        </q-item-section>
+                     </q-item>
+                  </q-list>
+               </q-btn-dropdown>
             </div>
 
             <!-- Main content -->
-            <div class="q-px-md px-xl-md scrollable-div custom-scrollbar">
+            <div class="q-px-md scrollable-div custom-scrollbar q-mt-sm">
                <div class="row q-col-gutter-md">
                   <transition appear :enter-active-class="`animated fadeIn delay-${i+1}`" v-for="(product, i) in displayProducts" :key="product.id">
-                     <div @click="$router.push(`/products/${product.id}`)" class="col-6 col-sm-4 col-md-3 q-mt-md text-center pointer">
-                        <q-img :src="product.image.url" spinner-color="white"></q-img>
-                        <h5 class="q-mt-sm">{{ product.name }}</h5>
-                        <h6 class="q-mt-none text-grey-14">${{ product.price }}</h6>
+                     <div @click="$router.push(`/products/${product.id}`)" class="col-6 col-sm-4 col-md-3 q-mt-sm text-center pointer">
+                        <q-card class="product-card">
+                           <q-img :src="product.image.url" spinner-color="white"></q-img>
+
+                           <q-card-section class="q-pa-sm">
+                              <p class="q-mt-sm text-grey-9 text-body1 text-bold text-italic ">{{ product.name }}</p>
+
+                              <span class="price-fab">{{ getCurrency(product.price) }}</span>
+                           </q-card-section>
+                        </q-card>
                      </div>
                   </transition>
                </div>
@@ -67,8 +71,10 @@ import { defineComponent } from 'vue'
 import { mapState } from 'vuex'
 import CartFab from 'components/CartFab.vue'
 import WelcomeOverlay from 'components/WelcomeOverlay.vue'
+import getCurrency from '../mixins/getCurrency'
 export default defineComponent({
    name: 'PageIndex',
+   mixins: [getCurrency],
    components: {
       CartFab, WelcomeOverlay
    },
@@ -127,5 +133,27 @@ export default defineComponent({
    &.active-category {
       border-color: $primary;
    }
+}
+
+.price-fab {
+   width: 50px;
+   height: 50px;
+   color: $primary;
+   background-color: #fff;
+   border-radius: 50%;
+   position: absolute;
+   right: -8px;
+   top: -40px;
+   z-index: 9;
+   border: 1px solid $grey-4;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-weight: bold;
+   box-shadow: 0px 10px 25px $grey-4;
+}
+.product-card {
+   box-shadow: 0px 5px 15px $grey-3;
+   border: 1px solid $grey-3;
 }
 </style>
