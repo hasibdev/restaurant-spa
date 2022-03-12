@@ -13,7 +13,7 @@
                   <div @click="selectedCategory = cat" :class="{'active-category': selectedCategory.id === cat.id}" class="relative-position category-item q-mt-md text-center pointer">
                      <q-img :src="cat.image.url" spinner-color="white" style="max-height: 160px;"></q-img>
                      <p class="text-body1 xs-hide category-name ellipsis">{{ cat.name }}</p>
-                     <p class="text-body1 sm-hide q-mt-sm ellipsis">{{ cat.name }}</p>
+                     <p class="text-body1 sm-hide md-hide lg-hide xl-hide q-mt-sm ellipsis">{{ cat.name }}</p>
                   </div>
                </transition>
             </div>
