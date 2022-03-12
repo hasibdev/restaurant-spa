@@ -76,14 +76,20 @@ input:focus {
 // ///////////
 
 // Large Device
-@media (min-width: $breakpoint-lg) {
+@media (min-width: $breakpoint-md) {
 
 }
+
+// //////////////////////////////////
 // Medium Device
-@media (min-width: 1024px) {
+@media (min-width: $breakpoint-sm) {
    .px-xl-md {
       padding-left: 48px;
       padding-right: 48px;
+   }
+   .px-md-md {
+      padding-left: 16px;
+      padding-right: 16px;
    }
    .my-md-xl {
       margin-top: 48px;
@@ -109,6 +115,7 @@ input:focus {
 }
 }
 
+// /////////////////////////////////
 // Small Device
 @media (min-width: $breakpoint-xs) {
    .px-xl-sm {
@@ -123,7 +130,7 @@ input:focus {
    }
 }
 
-
+// ///////////////////////////////////
 // Mobile Device
 @media (max-width: $breakpoint-xs) {
    h2 {

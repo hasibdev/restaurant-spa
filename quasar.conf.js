@@ -43,7 +43,7 @@ module.exports = configure(function (ctx) {
          // 'fontawesome-v5',
          // 'eva-icons',
          // 'themify',
-         // 'line-awesome',
+         'line-awesome',
          // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
 
          'roboto-font', // optional, you are not bound to it
@@ -97,7 +97,7 @@ module.exports = configure(function (ctx) {
          plugins: ['LoadingBar', 'Notify'],
          config: {
             loadingBar: {
-               color: '#72b63b'
+               color: 'primary'
             }
          },
 

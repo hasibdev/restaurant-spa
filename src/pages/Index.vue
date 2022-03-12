@@ -1,32 +1,49 @@
 <template>
    <q-page>
-      <!-- Welcom Overlay -->
-      <transition appear enter-active-class="animated fadeIn" leave-active-class="animated slideOutUp">
-         <div v-if="showWelcome" class="welcom-screen z-max">
-            <div class="overlay"></div>
-            <div class="content">
-               <p @click="hideWelcome" class="text-big q-mb-none">CLICK TO ORDER</p>
-            </div>
-         </div>
-      </transition>
+
+      <!-- Welcome Overlay -->
+      <welcome-overlay />
 
       <div v-if="!showWelcome" class="row">
          <!-- Left Content -->
-         <div class="col-4 col-md-3">
-            <div class="scrollable-div custom-scrollbar">
+         <div class="col-4 col-md-3 border-right">
+            <p class="bg-grey-2 text-grey-14 q-pa-md" style="font-size: 18px;">Categories</p>
+            <div class="scrollable-div custom-scrollbar q-px-sm px-md-md">
                <transition appear :enter-active-class="`animated fadeIn delay-${i+1}`" v-for="(cat, i) in categories" :key="cat.id">
-                  <div @click="selectedCategory = cat" class="q-px-sm px-xl-md q-py-xs q-mt-md text-center pointer">
-                     <q-img :src="cat.image.url" spinner-color="white" style="max-height: 150px;"></q-img>
-                     <h5 class="q-mt-md">{{ cat.name }}</h5>
+                  <div @click="selectedCategory = cat" :class="{'active-category': selectedCategory.id === cat.id}" class="relative-position category-item q-mt-md text-center pointer">
+                     <q-img :src="cat.image.url" spinner-color="white" style="max-height: 160px;"></q-img>
+                     <p class="text-body1 category-name">{{ cat.name }}</p>
                   </div>
                </transition>
             </div>
          </div>
          <!-- Right Content -->
-         <div class="col-8 col-md-9 bg-grey-2">
-            <div class="q-px-md px-xl-md scrollable-div custom-scrollbar">
-               <h2 class="text-muted q-my-md">{{selectedCategory.name}}</h2>
+         <div class="col-8 col-md-9">
+            <!-- Header -->
+            <div class="bg-grey-2 text-grey-14 flex justify-between items-center right-content-header">
+               <p style="font-size: 18px;">Products - <strong>{{ selectedCategory.name }}</strong></p>
 
+               <div>
+                  <q-btn-dropdown color="primary" label="Filter" dropdown-icon="las la-sliders-h">
+                     <q-list>
+                        <q-item clickable v-close-popup @click="onItemClick">
+                           <q-item-section>
+                              <q-item-label>Lowest price</q-item-label>
+                           </q-item-section>
+                        </q-item>
+
+                        <q-item clickable v-close-popup @click="onItemClick">
+                           <q-item-section>
+                              <q-item-label>Highest price</q-item-label>
+                           </q-item-section>
+                        </q-item>
+                     </q-list>
+                  </q-btn-dropdown>
+               </div>
+            </div>
+
+            <!-- Main content -->
+            <div class="q-px-md px-xl-md scrollable-div custom-scrollbar">
                <div class="row q-col-gutter-md">
                   <transition appear :enter-active-class="`animated fadeIn delay-${i+1}`" v-for="(product, i) in displayProducts" :key="product.id">
                      <div @click="$router.push(`/products/${product.id}`)" class="col-6 col-sm-4 col-md-3 q-mt-md text-center pointer">
@@ -49,10 +66,11 @@
 import { defineComponent } from 'vue'
 import { mapState } from 'vuex'
 import CartFab from 'components/CartFab.vue'
+import WelcomeOverlay from 'components/WelcomeOverlay.vue'
 export default defineComponent({
    name: 'PageIndex',
    components: {
-      CartFab,
+      CartFab, WelcomeOverlay
    },
    data() {
       return {
@@ -82,39 +100,32 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss">
-.welcom-screen {
-   background-image: url("assets/images/welcome-bg.jpg");
-   background-repeat: no-repeat;
-   background-size: cover;
-   background-position: center center;
-   background-color: #fff;
-   position: fixed;
-   height: 100vh;
-   width: 100vw;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   .overlay {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      background: rgba(0, 0, 0, 0.5);
-   }
-   .content {
-      position: relative;
-      z-index: 9999;
-      border: 4px solid #fff;
-      border-radius: 5px;
-      color: #fff;
-      padding: 20px 50px;
-      cursor: pointer;
-      .text-big {
-         font-size: 30px;
-      }
+<style lang="scss" scoped>
+.right-content-header {
+   padding: 11px 25px;
+}
+
+.border-right {
+   border-right: 1px solid $grey-4;
+}
+
+.category-name {
+   position: absolute;
+   top: 16px;
+   left: 0px;
+   color: white;
+   padding: 5px 10px;
+   border: 1px solid #fff;
+   border-left: 0px;
+   background-color: rgba(0, 0, 0, 0.548);
+   border-radius: 0px 0px 15px 0px;
+}
+
+.category-item {
+   border: 2px solid transparent;
+
+   &.active-category {
+      border-color: $primary;
    }
 }
 </style>
