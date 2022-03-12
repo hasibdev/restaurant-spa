@@ -129,6 +129,8 @@ export default defineComponent({
 
 .category-item {
    border: 2px solid transparent;
+   border-radius: 10px;
+   overflow: hidden;
 
    &.active-category {
       border-color: $primary;
