@@ -94,10 +94,10 @@ export default defineComponent({
       },
       filterProducts(value) {
          if (value === 'lowest') {
-            this.displayProducts = this.displayProducts.sort((a, b) => a.price - b.price)
+            this.displayProducts.sort((a, b) => a.price - b.price)
          }
          if (value === 'highest') {
-            this.displayProducts = this.displayProducts.sort((a, b) => b.price - a.price)
+            this.displayProducts.sort((a, b) => b.price - a.price)
          }
       }
    },
