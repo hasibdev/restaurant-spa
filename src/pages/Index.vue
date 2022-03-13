@@ -49,7 +49,7 @@
                   <h6 class="text-grey-9 q-ml-md">Categories</h6>
                   <!-- <category-slider /> -->
                   <div style="width: 100vw;">
-                     <swiper :slidesPerView="2" :spaceBetween="16">
+                     <swiper :slidesPerView="2" :spaceBetween="16" :freeMode="true" :modules="modules">
                         <swiper-slide v-for="(cat) in categories" :key="cat.id">
                            <div @click="selectedCategory = cat" :class="{'active-category': selectedCategory.id === cat.id}" class="relative-position category-item q-mt-md text-center pointer">
                               <q-img :src="cat.image.url" spinner-color="white" style="max-height: 160px;"></q-img>
@@ -97,6 +97,8 @@ import CartFab from 'components/CartFab.vue'
 import WelcomeOverlay from 'components/WelcomeOverlay.vue'
 import getCurrency from '../mixins/getCurrency'
 import { Swiper, SwiperSlide } from 'swiper/vue'
+// import required modules
+import { FreeMode } from "swiper"
 
 export default defineComponent({
    name: 'PageIndex',
@@ -108,6 +110,7 @@ export default defineComponent({
       return {
          selectedCategory: {},
          displayProducts: [],
+         modules: [FreeMode],
       }
    },
    computed: {
