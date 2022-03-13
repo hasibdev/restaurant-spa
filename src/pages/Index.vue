@@ -24,24 +24,30 @@
          <!-- Right Content -->
          <div class="col-sm-8 col-md-9">
             <div class="scrollable-div custom-scrollbar">
+               <!-- Header -->
                <div class="bg-grey-2 text-grey-14 flex justify-between items-center right-content-header">
                   <p style="font-size: 18px;">Products - <strong>{{ selectedCategory.name }}</strong></p>
 
-                  <q-btn-dropdown color="primary" label="Filter" dropdown-icon="las la-sliders-h">
-                     <q-list>
-                        <q-item clickable v-close-popup @click="filterProducts('lowest')">
-                           <q-item-section>
-                              <q-item-label>Lowest price</q-item-label>
-                           </q-item-section>
-                        </q-item>
+                  <div>
+                     <!-- Filter dropdown -->
+                     <q-btn-dropdown unelevated color="primary" :label="!$q.screen.xs ? 'Filter' : ''" dropdown-icon="las la-sliders-h" class="q-mx-sm">
+                        <q-list>
+                           <q-item clickable v-close-popup @click="filterProducts('lowest')">
+                              <q-item-section>
+                                 <q-item-label>Lowest price</q-item-label>
+                              </q-item-section>
+                           </q-item>
 
-                        <q-item clickable v-close-popup @click="filterProducts('highest')">
-                           <q-item-section>
-                              <q-item-label>Highest price</q-item-label>
-                           </q-item-section>
-                        </q-item>
-                     </q-list>
-                  </q-btn-dropdown>
+                           <q-item clickable v-close-popup @click="filterProducts('highest')">
+                              <q-item-section>
+                                 <q-item-label>Highest price</q-item-label>
+                              </q-item-section>
+                           </q-item>
+                        </q-list>
+                     </q-btn-dropdown>
+                     <!-- cart icon -->
+                     <cart-fab />
+                  </div>
                </div>
 
                <!-- Search box -->
@@ -90,9 +96,6 @@
             </div>
          </div>
       </div>
-
-      <!-- Floating button -->
-      <cart-fab />
    </q-page>
 </template>
 

@@ -1,9 +1,7 @@
 <template>
-   <q-page-sticky v-if="totalCartItems > 0" position="bottom-right" :offset="[20, 20]">
-      <q-btn fab @click="openCartbar" icon="shopping_cart" color="primary">
-         <q-badge color="red" floating>{{ totalCartItems }}</q-badge>
-      </q-btn>
-   </q-page-sticky>
+   <q-btn flat unelevated rounded @click="openCartbar" icon="shopping_cart" color="white" text-color="primary">
+      <q-badge color="primary" rounded floating>{{ totalCartItems }}</q-badge>
+   </q-btn>
 </template>
 
 <script>
