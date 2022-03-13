@@ -145,6 +145,7 @@ export default defineComponent({
    border: 2px solid transparent;
    border-radius: 10px;
    overflow: hidden;
+   box-shadow: 0px 10px 10px $grey-3;
 
    &.active-category {
       border-color: $primary;
