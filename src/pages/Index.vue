@@ -44,6 +44,12 @@
                   </q-btn-dropdown>
                </div>
 
+               <!-- Search box -->
+               <div class="search-box q-my-md q-px-md">
+                  <input v-model="searchText" @input="onSearch" type="text" placeholder="Search...">
+                  <q-icon name="search" color="primary" />
+               </div>
+
                <!-- Category Slider -->
                <div v-if="$q.screen.lt.sm" class="q-my-md">
                   <h6 class="text-grey-9 q-ml-md">Categories</h6>
@@ -111,6 +117,7 @@ export default defineComponent({
          selectedCategory: {},
          displayProducts: [],
          modules: [FreeMode],
+         searchText: ''
       }
    },
    computed: {
@@ -127,6 +134,9 @@ export default defineComponent({
          if (value === 'highest') {
             this.displayProducts.sort((a, b) => b.price - a.price)
          }
+      },
+      onSearch() {
+         console.log(this.searchText)
       }
    },
    created() {
@@ -200,5 +210,26 @@ export default defineComponent({
 .product-card {
    box-shadow: 0px 5px 15px $grey-3;
    border: 1px solid $grey-3;
+}
+
+.search-box {
+   position: relative;
+   > input {
+      width: 100%;
+      padding: 12px 33px 12px 20px;
+      border: none;
+      box-shadow: 0px 5px 25px $grey-4;
+      font-size: 17px;
+      &:focus {
+         outline: none;
+      }
+   }
+
+   > .q-icon {
+      position: absolute;
+      right: 24px;
+      top: 12px;
+      font-size: 26px;
+   }
 }
 </style>
