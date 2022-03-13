@@ -61,7 +61,7 @@
                </div>
 
                <!-- Main content -->
-               <div class="q-px-md q-mt-sm">
+               <div class="q-px-md">
                   <div class="row q-col-gutter-md">
                      <transition appear :enter-active-class="`animated fadeIn delay-${i+1}`" v-for="(product, i) in displayProducts" :key="product.id">
                         <div @click="$router.push(`/products/${product.id}`)" class="col-6 col-sm-4 col-md-3 q-mt-sm text-center pointer">
