@@ -82,7 +82,6 @@
 
 <script>
 import { mapState, mapMutations, mapGetters } from 'vuex'
-import 'vue3-carousel/dist/carousel.css'
 import CartFab from 'components/CartFab.vue'
 import getCurrency from '../../mixins/getCurrency'
 import { uid, extend } from 'quasar'

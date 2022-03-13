@@ -44,6 +44,22 @@
                   </q-btn-dropdown>
                </div>
 
+               <!-- Category Slider -->
+               <div v-if="$q.screen.lt.sm" class="q-my-md">
+                  <h6 class="text-grey-9 q-ml-md">Categories</h6>
+                  <!-- <category-slider /> -->
+                  <div style="width: 100vw;">
+                     <swiper :slidesPerView="2" :spaceBetween="16">
+                        <swiper-slide v-for="(cat) in categories" :key="cat.id">
+                           <div @click="selectedCategory = cat" :class="{'active-category': selectedCategory.id === cat.id}" class="relative-position category-item q-mt-md text-center pointer">
+                              <q-img :src="cat.image.url" spinner-color="white" style="max-height: 160px;"></q-img>
+                              <p class="text-body1 category-name ellipsis">{{ cat.name }}</p>
+                           </div>
+                        </swiper-slide>
+                     </swiper>
+                  </div>
+               </div>
+
                <!-- Main content -->
                <div class="q-px-md q-mt-sm">
                   <div class="row q-col-gutter-md">
@@ -80,16 +96,18 @@ import { mapState } from 'vuex'
 import CartFab from 'components/CartFab.vue'
 import WelcomeOverlay from 'components/WelcomeOverlay.vue'
 import getCurrency from '../mixins/getCurrency'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+
 export default defineComponent({
    name: 'PageIndex',
    mixins: [getCurrency],
    components: {
-      CartFab, WelcomeOverlay
+      CartFab, WelcomeOverlay, Swiper, SwiperSlide,
    },
    data() {
       return {
          selectedCategory: {},
-         displayProducts: []
+         displayProducts: [],
       }
    },
    computed: {
