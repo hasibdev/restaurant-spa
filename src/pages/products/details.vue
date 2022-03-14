@@ -76,13 +76,13 @@
       </div>
 
       <!-- Floating button -->
-      <cart-fab />
+      <!-- <cart-fab /> -->
    </q-page>
 </template>
 
 <script>
 import { mapState, mapMutations, mapGetters } from 'vuex'
-import CartFab from 'components/CartFab.vue'
+// import CartFab from 'components/CartFab.vue'
 import getCurrency from '../../mixins/getCurrency'
 import { uid, extend } from 'quasar'
 
@@ -90,7 +90,7 @@ export default {
    name: "product-details",
    mixins: [getCurrency],
    components: {
-      CartFab
+      // CartFab
    },
    data() {
       return {

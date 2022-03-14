@@ -51,9 +51,24 @@
                </div>
 
                <!-- Search box -->
-               <div class="search-box q-my-md q-px-md">
-                  <input v-model="searchText" @input="onSearch" type="text" placeholder="Search...">
-                  <q-icon name="search" color="primary" />
+               <div class="search-area q-my-md q-px-md">
+                  <div class="search-box">
+                     <input v-model="searchText" @input="onSearch" type="text" placeholder="Search...">
+                     <q-icon name="search" color="primary" />
+                  </div>
+
+                  <!-- Search Result -->
+                  <q-list v-if="searchText" class="search-result" bordered>
+                     <q-item clickable v-ripple v-for="item in searchResults" :to="`/products/${item.id}`" :key="item.id">
+                        <q-item-section thumbnail>
+                           <img :src="item.image.url">
+                        </q-item-section>
+                        <q-item-section>
+                           <p class="text-body1">{{ item.name }}</p>
+                           <p class="text-body1">{{ getCurrency(item.price) }}</p>
+                        </q-item-section>
+                     </q-item>
+                  </q-list>
                </div>
 
                <!-- Category Slider -->
@@ -120,7 +135,8 @@ export default defineComponent({
          selectedCategory: {},
          displayProducts: [],
          modules: [FreeMode],
-         searchText: ''
+         searchText: '',
+         searchResults: []
       }
    },
    computed: {
@@ -139,7 +155,11 @@ export default defineComponent({
          }
       },
       onSearch() {
-         console.log(this.searchText)
+         if (this.searchText) {
+            this.searchResults = this.products
+               .filter(p => p.name.toLocaleLowerCase().includes(this.searchText.toLocaleLowerCase()))
+               .slice(0, 5)
+         }
       }
    },
    created() {
@@ -233,6 +253,21 @@ export default defineComponent({
       right: 24px;
       top: 12px;
       font-size: 26px;
+   }
+}
+
+.search-area {
+   position: relative;
+   .search-result {
+      position: absolute;
+      width: 100%;
+      left: 0;
+      top: 100%;
+      z-index: 99;
+      background: $grey-2;
+      padding: 0 16px;
+      border: 0;
+      // box-shadow: 0px 5px 15px $grey-7;
    }
 }
 </style>
