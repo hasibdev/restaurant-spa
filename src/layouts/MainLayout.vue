@@ -1,6 +1,12 @@
 <template>
    <q-layout view="hHh lpR fFr">
 
+      <q-header class="bg-white text-grey-10">
+         <q-toolbar>
+            <the-header />
+         </q-toolbar>
+      </q-header>
+
       <q-drawer v-model="rightDrawerOpen" class="custom-scrollbar" side="right" bordered>
          <cart-sidebar></cart-sidebar>
       </q-drawer>
@@ -14,10 +20,11 @@
 
 <script>
 import CartSidebar from 'components/CartSidebar.vue'
+import TheHeader from 'components/TheHeader.vue'
 
 export default {
    components: {
-      CartSidebar,
+      CartSidebar, TheHeader
    },
    data() {
       return {
