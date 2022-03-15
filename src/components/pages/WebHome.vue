@@ -23,14 +23,19 @@
          <h4 class="border-left text-bold text-grey-9">menu category</h4>
 
          <!-- Category Slider -->
-         <div class="q-my-md" style="width: 100vw;">
-            <swiper :slidesPerView="5.7" :spaceBetween="16" :freeMode="true" :modules="modules">
+         <div class="q-my-md">
+            <swiper :slidesPerView="4.5" :spaceBetween="16" :freeMode="true" :modules="modules">
                <swiper-slide v-for="(cat) in categories" :key="cat.id">
-                  <div class="flex">
-                     <img :src="cat.image.url" style="max-width: 70px;" />
-                     <div>
-                        <p>{{ cat.name }}</p>
-                        <p>{{ getCurrency(cat.price) }}</p>
+                  <div class="row items-center">
+                     <q-avatar square size="5rem">
+                        <q-img :src="cat.image.url" />
+                     </q-avatar>
+                     <div class="q-ml-md">
+                        <p class="text-bold">{{ cat.name }}</p>
+                        <q-badge color="red" class="text-bold" style="padding: 4px 8px; letter-spacing: 0.8px;">
+                           Top Rated
+                        </q-badge>
+
                      </div>
                   </div>
                </swiper-slide>
