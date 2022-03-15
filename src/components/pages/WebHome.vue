@@ -24,14 +24,13 @@
 
          <!-- Category Slider -->
          <div class="q-my-md">
-            <swiper :slidesPerView="4.5" :spaceBetween="16" :freeMode="true" :modules="modules">
+            <swiper :slidesPerView="3.7" :spaceBetween="16" :freeMode="true" :modules="modules">
                <swiper-slide v-for="(cat) in categories" :key="cat.id">
-                  <div class="row items-center">
-                     <q-avatar square size="5rem">
-                        <q-img :src="cat.image.url" />
-                     </q-avatar>
+                  <div class="row items-center category-slide q-pa-md q-my-md">
+                     <q-img :src="cat.image.url" style="width: 80px;" />
+
                      <div class="q-ml-md">
-                        <p class="text-bold">{{ cat.name }}</p>
+                        <p class="text-body1 text-bold">{{ cat.name }}</p>
                         <q-badge color="red" class="text-bold" style="padding: 4px 8px; letter-spacing: 0.8px;">
                            Top Rated
                         </q-badge>
@@ -42,6 +41,23 @@
             </swiper>
          </div>
 
+      </div>
+   </div>
+
+   <!-- Restaurant Foods -->
+   <div class="container">
+      <h4 class="border-left text-bold text-grey-9 q-mb-lg">Restaurant Foods</h4>
+
+      <div class="row q-col-gutter-md">
+         <div v-for="product in products" :key="product.id" class="col-md-3 q-mb-xl">
+            <div class="product-card">
+               <q-img :src="product.image.url" />
+
+               <div>
+                  <p>{{ product.name }}</p>
+               </div>
+            </div>
+         </div>
       </div>
    </div>
 </template>
@@ -103,5 +119,9 @@ export default {
          font-weight: bold;
       }
    }
+}
+
+.category-slide {
+   box-shadow: 0px 8px 10px $grey-3;
 }
 </style>
