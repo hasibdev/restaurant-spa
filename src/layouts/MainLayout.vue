@@ -3,7 +3,9 @@
 
       <q-header class="bg-white text-grey-10">
          <q-toolbar>
-            <the-header />
+            <div class="container">
+               <the-header />
+            </div>
          </q-toolbar>
       </q-header>
 
