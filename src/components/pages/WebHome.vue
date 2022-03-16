@@ -92,6 +92,16 @@
          </div>
       </div>
    </div>
+
+   <!-- Categories batcg list -->
+   <div class="container q-my-lg category-batch-list">
+      <h4 class="border-left text-bold text-grey-9 q-mb-lg">Categories</h4>
+
+      <div>
+         <!-- <span v-for="cat in categories" :key="cat.id" color="red" :label="cat.name" class="q-px-lg q-py-md text-bold q-mr-sm"></span -->
+         <span v-for="cat in categories" :key="cat.id" class="category-batch">{{cat.name}}</span>
+      </div>
+   </div>
 </template>
 
 <script>
@@ -171,6 +181,18 @@ export default {
    .banner-title {
       color: #30314a;
       line-height: 70px;
+   }
+}
+
+.category-batch-list {
+   .category-batch {
+      padding: 10px 20px;
+      border: 1px solid $red-6;
+      color: $red-6;
+      border-radius: 50px;
+      font-weight: bold;
+      margin-right: 5px;
+      letter-spacing: 0.5px;
    }
 }
 </style>
