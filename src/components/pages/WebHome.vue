@@ -23,23 +23,7 @@
          <h4 class="border-left text-bold text-grey-9">menu category</h4>
 
          <!-- Category Slider -->
-         <div class="q-my-md">
-            <swiper :slidesPerView="3.7" :spaceBetween="16" :freeMode="true" :modules="modules">
-               <swiper-slide v-for="(cat) in categories" :key="cat.id">
-                  <div class="row items-center category-slide q-pa-md q-my-md">
-                     <q-img :src="cat.image.url" style="width: 80px;" />
-
-                     <div class="q-ml-md">
-                        <p class="text-body1 text-bold">{{ cat.name }}</p>
-                        <q-badge color="red" class="text-bold" style="padding: 4px 8px; letter-spacing: 0.8px;">
-                           Top Rated
-                        </q-badge>
-
-                     </div>
-                  </div>
-               </swiper-slide>
-            </swiper>
-         </div>
+         <category-slider />
 
       </div>
    </div>
@@ -105,22 +89,15 @@
 </template>
 
 <script>
-import { Swiper, SwiperSlide } from 'swiper/vue'
-// import required modules
-import { FreeMode } from "swiper"
 import { mapState } from 'vuex'
 import getCurrency from '../../mixins/getCurrency'
+import CategorySlider from 'components/CategorySlider'
+
 export default {
    mixins: [getCurrency],
    components: {
-      Swiper, SwiperSlide
+      CategorySlider,
    },
-   data() {
-      return {
-         modules: [FreeMode],
-      }
-   },
-
    computed: {
       ...mapState('data', ['categories', 'products'])
    },
@@ -159,6 +136,9 @@ export default {
       line-height: 70px;
       .b {
          font-weight: bold;
+      }
+      @media (max-width: 600px) {
+         line-height: 40px;
       }
    }
 }
