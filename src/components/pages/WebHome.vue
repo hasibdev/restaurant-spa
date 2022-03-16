@@ -62,8 +62,32 @@
                   <q-badge color="info" text-color="white" label="Delivered 30pm" class="text-bold" style="padding: 4px 8px; letter-spacing: 0.8px;" />
                   <q-badge color="red-5" text-color="white" :label="getCurrency(product.price)" class="text-bold q-ml-sm" style="padding: 4px 8px; letter-spacing: 0.8px;" />
 
-                  <p class="q-mt-sm text-grey-8">Add to cart ></p>
+                  <p class="q-mt-sm text-body2 text-bold text-grey-8">Add to cart
+                     <q-icon name="arrow_right" size="1.6rem" class="q-ml-sm" />
+                  </p>
                </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!-- Banner Area -->
+   <div class="banner-area" style="background-color: #f9f8fd;">
+      <div class="container">
+         <div class="row">
+            <div class="col-6 q-my-lg">
+               <h2 class="banner-title">
+                  Are you <span class="text-bold">Looking</span> for <br>
+                  a flexible <span class="text-bold">Part</span> <br>
+                  <span class="text-bold">Time job?</span>
+               </h2>
+
+               <p class="q-my-lg text-subtitle1 text-bold text-grey-9">Then become a rider at Foodka</p>
+
+               <q-btn unelevated color="red" label="Sign Up" class="rounded-borders" />
+            </div>
+            <div class="col-6">
+               <q-img :src="require('assets/images/map-mobile.png')" />
             </div>
          </div>
       </div>
@@ -88,7 +112,7 @@ export default {
    },
 
    computed: {
-      ...mapState('data', ['categories', 'products', 'showWelcome'])
+      ...mapState('data', ['categories', 'products'])
    },
 }
 </script>
@@ -140,6 +164,13 @@ export default {
       margin-top: -10px;
       position: relative;
       border-radius: 10px 10px 0px 0px;
+   }
+}
+
+.banner-area {
+   .banner-title {
+      color: #30314a;
+      line-height: 70px;
    }
 }
 </style>
