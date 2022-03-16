@@ -53,8 +53,16 @@
             <div class="product-card">
                <q-img :src="product.image.url" />
 
-               <div>
-                  <p>{{ product.name }}</p>
+               <div class="cart-content q-pa-md">
+                  <p class="text-body1 text-bold text-grey-9 q-mb-sm">
+                     <span>{{ product.name }}</span>
+                     <q-icon name="favorite" color="red" class="q-ml-sm" />
+                  </p>
+
+                  <q-badge color="info" text-color="white" label="Delivered 30pm" class="text-bold" style="padding: 4px 8px; letter-spacing: 0.8px;" />
+                  <q-badge color="red-5" text-color="white" :label="getCurrency(product.price)" class="text-bold q-ml-sm" style="padding: 4px 8px; letter-spacing: 0.8px;" />
+
+                  <p class="q-mt-sm text-grey-8">Add to cart ></p>
                </div>
             </div>
          </div>
@@ -123,5 +131,15 @@ export default {
 
 .category-slide {
    box-shadow: 0px 8px 10px $grey-3;
+}
+
+.product-card {
+   .cart-content {
+      background-color: #fff;
+      box-shadow: 0px 8px 10px $grey-3;
+      margin-top: -10px;
+      position: relative;
+      border-radius: 10px 10px 0px 0px;
+   }
 }
 </style>

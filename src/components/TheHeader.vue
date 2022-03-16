@@ -11,19 +11,19 @@
       <div>
          <ul class="menu-ul flex">
             <li>
-               <router-link to="/" class=" q-pa-sm q-mx-sm text-weight-medium text-grey-9">Home</router-link>
+               <router-link to="/" class=" q-pa-sm q-mx-sm text-weight-medium text-grey-8 text-body2">Home</router-link>
             </li>
             <li>
-               <router-link to="/about" class=" q-pa-sm q-mx-sm text-weight-medium text-grey-9">About Us</router-link>
+               <router-link to="/about" class=" q-pa-sm q-mx-sm text-weight-medium text-grey-8 text-body2">About Us</router-link>
             </li>
             <li>
-               <router-link to="/contact" class=" q-pa-sm q-mx-sm text-weight-medium text-grey-9">Contact Us</router-link>
+               <router-link to="/contact" class=" q-pa-sm q-mx-sm text-weight-medium text-grey-8 text-body2">Contact Us</router-link>
             </li>
             <li>
-               <router-link to="/restaurants" class=" q-pa-sm q-mx-sm text-weight-medium text-grey-9">Restaurants</router-link>
+               <router-link to="/restaurants" class=" q-pa-sm q-mx-sm text-weight-medium text-grey-8 text-body2">Restaurants</router-link>
             </li>
             <li>
-               <router-link to="/foods" class=" q-pa-sm q-mx-sm text-weight-medium text-grey-9">Foods</router-link>
+               <router-link to="/foods" class=" q-pa-sm q-mx-sm text-weight-medium text-grey-8 text-body2">Foods</router-link>
             </li>
          </ul>
       </div>
