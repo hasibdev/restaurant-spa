@@ -17,16 +17,19 @@
          <router-view />
       </q-page-container>
 
+      <the-footer />
+
    </q-layout>
 </template>
 
 <script>
 import CartSidebar from 'components/CartSidebar.vue'
 import TheHeader from 'components/TheHeader.vue'
+import TheFooter from 'components/TheFooter.vue'
 
 export default {
    components: {
-      CartSidebar, TheHeader
+      CartSidebar, TheHeader, TheFooter
    },
    data() {
       return {

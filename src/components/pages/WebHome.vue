@@ -84,7 +84,7 @@
 
                <p class="q-my-lg text-subtitle1 text-bold text-grey-9">Then become a rider at Foodka</p>
 
-               <q-btn unelevated color="red" label="Sign Up" class="rounded-borders" />
+               <q-btn unelevated no-caps color="red-8" label="Sign Up" style="border-radius: 8px; letter-spacing: 0.5px;" />
             </div>
             <div class="col-6">
                <q-img :src="require('assets/images/map-mobile.png')" />
@@ -94,7 +94,7 @@
    </div>
 
    <!-- Categories batcg list -->
-   <div class="container q-my-lg category-batch-list">
+   <div class="container q-my-xl q-py-md category-batch-list">
       <h4 class="border-left text-bold text-grey-9 q-mb-lg">Categories</h4>
 
       <div>
@@ -187,8 +187,8 @@ export default {
 .category-batch-list {
    .category-batch {
       padding: 10px 20px;
-      border: 1px solid $red-6;
-      color: $red-6;
+      border: 1px solid $red-8;
+      color: $red-8;
       border-radius: 50px;
       font-weight: bold;
       margin-right: 5px;
