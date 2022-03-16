@@ -9,6 +9,11 @@
          </q-toolbar>
       </q-header>
 
+      <q-drawer v-model="leftDrawerOpen" side="left" overlay behavior="mobile" bordered>
+         <!-- drawer content -->
+         <p>Menu items</p>
+      </q-drawer>
+
       <q-drawer v-model="rightDrawerOpen" class="custom-scrollbar" side="right" bordered>
          <cart-sidebar></cart-sidebar>
       </q-drawer>
@@ -33,7 +38,8 @@ export default {
    },
    data() {
       return {
-         rightDrawerOpen: false
+         rightDrawerOpen: false,
+         leftDrawerOpen: false
       }
    },
 
@@ -48,11 +54,13 @@ export default {
          }
       })
 
-      // Open sidebar on confition of screen and cart item
-      // if (this.$q.screen.gt.sm && this.$store.state.cart.cart.length && this.$route.name !== 'checkout') {
-      //    this.emitter.emit("toggle-sidebar", true)
-      // }
-
+      this.emitter.on("toggle-leftbar", isOpen => {
+         if (isOpen === undefined) {
+            this.leftDrawerOpen = !this.leftDrawerOpen
+         } else {
+            this.leftDrawerOpen = isOpen
+         }
+      })
    },
 }
 </script>

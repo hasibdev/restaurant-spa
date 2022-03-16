@@ -75,7 +75,7 @@
    <div class="banner-area" style="background-color: #f9f8fd;">
       <div class="container">
          <div class="row">
-            <div class="col-6 q-my-lg">
+            <div class="col-6 q-my-lg q-py-md">
                <h2 class="banner-title">
                   Are you <span class="text-bold">Looking</span> for <br>
                   a flexible <span class="text-bold">Part</span> <br>

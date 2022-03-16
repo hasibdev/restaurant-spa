@@ -2,13 +2,15 @@
    <nav class="flex justify-between items-center full-width q-py-md q-px-lg">
       <!-- Logo -->
       <div>
+         <q-btn v-if="!$q.screen.gt.sm" dense flat round icon="menu" @click="toggleLeftDrawer" />
+
          <q-avatar square>
             <img src="https://cdn.quasar.dev/logo-v2/svg/logo.svg" />
          </q-avatar>
       </div>
 
       <!-- Menu -->
-      <div>
+      <div v-if="$q.screen.gt.sm">
          <ul class="menu-ul flex">
             <li>
                <router-link to="/" class=" q-pa-sm q-mx-sm text-weight-medium text-grey-8 text-body2">Home</router-link>
@@ -39,7 +41,11 @@
 
 <script>
 export default {
-
+   methods: {
+      toggleLeftDrawer() {
+         this.emitter.emit('toggle-leftbar', true)
+      }
+   },
 }
 </script>
 
