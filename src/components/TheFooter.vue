@@ -1,7 +1,7 @@
 <template>
-   <div class="bg-grey-1 q-py-xl">
+   <div class="bg-grey-2 q-py-xl">
       <div class="container">
-         <div class="row">
+         <div class="row q-col-gutter-md">
             <!-- Column -->
 
             <div class="col-md-4">
@@ -38,13 +38,13 @@
             </div>
 
             <!-- Column -->
-            <div class="col-md-4">
+            <div class="col-md-4 mt-mobile-xl">
                <q-icon name="where_to_vote" size="3rem" color="red-8" />
                <p class="text-body1 text-grey-10 q-mt-lg">315/8 Ulon road, Rampura, <br> Dhaka, Bangladesh</p>
             </div>
 
             <!-- Column -->
-            <div class="col-md-4">
+            <div class="col-md-4 mt-mobile-xl">
                <h5 class="text-grey-10 q-mb-md">Our Contact</h5>
 
                <p class="text-body2 text-bold q-mt-sm text-grey-10">

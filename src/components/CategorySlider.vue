@@ -52,6 +52,10 @@ export default {
                slidesPerView: 4.2,
                spaceBetween: 15,
             },
+            '1400': {
+               slidesPerView: 4.9,
+               spaceBetween: 15,
+            },
          }
       }
    },

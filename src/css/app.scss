@@ -113,9 +113,12 @@ input:focus {
    .d-md-none {
       display: none;
    }
-.order-md-first {
-   order: -1;
-}
+   .order-md-first {
+      order: -1;
+   }
+   .q-ml-md-sm {
+      margin-left: 8px;
+   }
 }
 
 // /////////////////////////////////
@@ -130,6 +133,9 @@ input:focus {
    }
    .d-sm-none {
       display: none;
+   }
+   .q-ml-sm-md {
+      margin-left: 16px;
    }
 }
 
@@ -147,5 +153,11 @@ input:focus {
 
    h5 {
       font-size: 18px;
+   }
+   .order-mobile-first {
+      order: -10000;
+   }
+   .mt-mobile-xl {
+      margin-top: 48px;
    }
 }
