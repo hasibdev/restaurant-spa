@@ -45,7 +45,7 @@
                         </q-list>
                      </q-btn-dropdown>
                      <!-- cart icon -->
-                     <cart-fab />
+                     <!-- <cart-fab /> -->
                   </div>
                </div>
 
@@ -116,7 +116,6 @@
 <script>
 import { defineComponent } from 'vue'
 import { mapState } from 'vuex'
-import CartFab from 'components/CartFab.vue'
 import WelcomeOverlay from 'components/WelcomeOverlay.vue'
 import getCurrency from '../mixins/getCurrency'
 import { Swiper, SwiperSlide } from 'swiper/vue'
@@ -128,7 +127,7 @@ export default defineComponent({
    name: 'PageIndex',
    mixins: [getCurrency],
    components: {
-      CartFab, WelcomeOverlay, Swiper, SwiperSlide
+      WelcomeOverlay, Swiper, SwiperSlide
    },
    data() {
       return {

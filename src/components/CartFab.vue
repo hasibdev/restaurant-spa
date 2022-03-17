@@ -1,5 +1,5 @@
 <template>
-   <q-btn flat unelevated rounded @click="openCartbar" icon="shopping_cart" color="white" text-color="primary">
+   <q-btn flat unelevated rounded @click="openCartbar" icon="shopping_cart" color="white" text-color="grey-8">
       <q-badge v-if="totalCartItems > 0" color="primary" rounded floating>{{ totalCartItems }}</q-badge>
    </q-btn>
 </template>

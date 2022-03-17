@@ -11,7 +11,7 @@
 
       <!-- Menu -->
       <div v-if="$q.screen.gt.sm">
-         <ul class="menu-ul flex">
+         <ul class="menu-ul flex items-center">
             <li>
                <router-link to="/" class=" q-pa-sm q-mx-sm text-weight-medium text-grey-8 text-body2" style="font-size: 17px;">
                   Home
@@ -28,6 +28,10 @@
                </router-link>
             </li>
 
+            <li>
+               <cart-fab></cart-fab>
+            </li>
+
          </ul>
       </div>
 
@@ -41,7 +45,11 @@
 </template>
 
 <script>
+import CartFab from 'components/CartFab.vue'
 export default {
+   components: {
+      CartFab,
+   },
    methods: {
       toggleLeftDrawer() {
          this.emitter.emit('toggle-leftbar', true)
