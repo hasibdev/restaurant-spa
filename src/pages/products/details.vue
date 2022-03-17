@@ -31,7 +31,7 @@
                      <q-btn @click="addToCart" size="md" padding="10px" class="full-width q-mt-sm" unelevated color="primary">ADD TO CART</q-btn>
                   </div>
                   <div class="col-5">
-                     <q-btn to="/" size="md" padding="10px" class="full-width q-mt-sm" unelevated color="grey-6">CANCLE</q-btn>
+                     <q-btn to="/shop" size="md" padding="10px" class="full-width q-mt-sm" unelevated color="grey-6">CANCLE</q-btn>
                   </div>
 
                </div>

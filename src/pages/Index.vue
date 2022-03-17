@@ -33,20 +33,23 @@
       <h4 class="border-left text-bold text-grey-9 q-mb-lg">Restaurant Foods</h4>
 
       <div class="row q-col-gutter-md">
-         <div v-for="product in products" :key="product.id" @click="$router.push(`/products/${product.id}`)" class="col-md-3 col-sm-4 col-6 q-mb-xl cursor-pointer">
+         <div v-for="product in products" :key="product.id" class="col-md-3 col-sm-4 col-6 q-mb-xl ">
             <div class="product-card">
-               <q-img :src="product.image.url" />
+               <q-img :src="product.image.url" @click="$router.push(`/products/${product.id}`)" class="cursor-pointer" />
 
                <div class="cart-content q-pa-md">
                   <p class="text-body1 text-bold text-grey-9 q-mb-sm">
-                     <span>{{ product.name }}</span>
+                     <span @click="$router.push(`/products/${product.id}`)" class="cursor-pointer">
+                        {{ product.name }}
+                     </span>
                      <q-icon name="favorite" color="red" class="q-ml-sm" />
                   </p>
 
                   <q-badge color="info" text-color="white" label="Delivered 30pm" class="text-bold" style="padding: 4px 8px; letter-spacing: 0.8px;" />
                   <q-badge color="red-5" text-color="white" :label="getCurrency(product.price)" class="text-bold q-ml-md-sm" style="padding: 4px 8px; letter-spacing: 0.8px;" />
 
-                  <p class="q-mt-sm text-body2 text-bold text-grey-8">Add to cart
+                  <p @click="$router.push(`/products/${product.id}`)" class="q-mt-sm text-body2 text-bold text-grey-8 cursor-pointer">
+                     Delivered Now
                      <q-icon name="arrow_right" size="1.6rem" class="q-ml-sm" />
                   </p>
                </div>
@@ -92,7 +95,6 @@
 import { mapState } from 'vuex'
 import getCurrency from '../mixins/getCurrency'
 import CategorySlider from 'components/CategorySlider'
-
 export default {
    mixins: [getCurrency],
    components: {
@@ -100,6 +102,9 @@ export default {
    },
    computed: {
       ...mapState('data', ['categories', 'products'])
+   },
+   methods: {
+
    },
 }
 </script>

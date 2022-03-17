@@ -1,5 +1,9 @@
 <template>
    <div class="q-pa-md">
+      <div class="flex justify-end">
+         <q-icon name="cancel" @click="emitter.emit('toggle-sidebar', false)" class="text-grey-8 cursor-pointer" style="font-size: 18px;" />
+      </div>
+
       <h6 class="text-center text-grey-14 q-mt-sm border-b">MY CART ({{totalCartItems}})</h6>
       <p @click="clearCart" class="pointer text-right text-primary">Clear</p>
 
