@@ -1,5 +1,5 @@
 <template>
-   <nav class="flex justify-between items-center full-width q-py-md q-px-lg">
+   <nav class="flex justify-between items-center full-width q-py-lg q-px-lg">
       <!-- Logo -->
       <div>
          <q-btn v-if="!$q.screen.gt.sm" dense flat round icon="menu" @click="toggleLeftDrawer" />
@@ -13,13 +13,19 @@
       <div v-if="$q.screen.gt.sm">
          <ul class="menu-ul flex">
             <li>
-               <router-link to="/" class=" q-pa-sm q-mx-sm text-weight-medium text-grey-8 text-body2">Home</router-link>
+               <router-link to="/" class=" q-pa-sm q-mx-sm text-weight-medium text-grey-8 text-body2" style="font-size: 17px;">
+                  Home
+               </router-link>
             </li>
             <li>
-               <router-link to="/shop" class=" q-pa-sm q-mx-sm text-weight-medium text-grey-8 text-body2">Shop</router-link>
+               <router-link to="/shop" class=" q-pa-sm q-mx-sm text-weight-medium text-grey-8 text-body2" style="font-size: 17px;">
+                  Shop
+               </router-link>
             </li>
             <li>
-               <router-link to="/contact" class=" q-pa-sm q-mx-sm text-weight-medium text-grey-8 text-body2">Contact Us</router-link>
+               <router-link to="/contact" class=" q-pa-sm q-mx-sm text-weight-medium text-grey-8 text-body2" style="font-size: 17px;">
+                  Contact Us
+               </router-link>
             </li>
 
          </ul>
