@@ -1,5 +1,5 @@
 <template>
-   <nav class="flex justify-between items-center full-width q-py-lg q-px-lg">
+   <nav :class="smallheader ? 'q-py-sm' : 'q-py-lg'" class="navbar">
       <!-- Logo -->
       <div>
          <q-btn v-if="!$q.screen.gt.sm" dense flat round icon="menu" @click="toggleLeftDrawer" />
@@ -50,15 +50,42 @@ export default {
    components: {
       CartFab,
    },
+   data() {
+      return {
+         smallheader: false
+      }
+   },
    methods: {
       toggleLeftDrawer() {
          this.emitter.emit('toggle-leftbar', true)
+      },
+      checkSmallHeader(val) {
+         if (val > 10) this.smallheader = true
+         else this.smallheader = false
       }
    },
+
+   mounted() {
+      this.checkSmallHeader(window.scrollY)
+      window.addEventListener('scroll', (e) => {
+         this.checkSmallHeader(window.scrollY)
+      })
+   },
+
 }
 </script>
 
 <style lang="scss">
+// flex justify-between items-center full-width q-px-lg
+.navbar {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   width: 100%;
+   padding-left: 24px;
+   padding-right: 24px;
+   transition: all 0.2s ease-in-out;
+}
 .menu-ul {
    > li > a {
       &:hover {
