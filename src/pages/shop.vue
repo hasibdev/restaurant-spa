@@ -163,7 +163,11 @@ export default defineComponent({
       }
    },
    created() {
-      this.selectedCategory = this.categories[0]
+      if (this.$route.query.category) {
+         this.selectedCategory = this.categories.find(cat => cat.id === this.$route.query.category)
+      } else {
+         this.selectedCategory = this.categories[0]
+      }
    },
    watch: {
       selectedCategory: {

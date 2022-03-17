@@ -2,7 +2,7 @@
    <div class="q-my-md">
       <swiper :slidesPerView="2.0" :spaceBetween="15" :freeMode="true" :modules="modules" :breakpoints="breakpoints">
          <swiper-slide v-for="(cat) in categories" :key="cat.id">
-            <div class="row items-center category-slide q-pa-md q-my-md">
+            <div @click="$router.push(`/shop?category=${cat.id}`)" class="row items-center category-slide q-pa-md q-my-md cursor-pointer">
                <div class="col-5">
                   <q-img :src="cat.image.url" />
                </div>

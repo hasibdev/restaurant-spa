@@ -41,7 +41,7 @@
       <h4 class="border-left text-bold text-grey-9 q-mb-lg">Restaurant Foods</h4>
 
       <div class="row q-col-gutter-md">
-         <div v-for="product in products" :key="product.id" class="col-md-3 col-sm-4 col-6 q-mb-xl">
+         <div v-for="product in products" :key="product.id" @click="$router.push(`/products/${product.id}`)" class="col-md-3 col-sm-4 col-6 q-mb-xl cursor-pointer">
             <div class="product-card">
                <q-img :src="product.image.url" />
 
