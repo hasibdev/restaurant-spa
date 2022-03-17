@@ -1,12 +1,4 @@
 <template>
-   <q-header class="bg-white text-grey-10">
-      <q-toolbar>
-         <div class="container">
-            <the-header />
-         </div>
-      </q-toolbar>
-   </q-header>
-
    <!-- Hero Area -->
    <div class="hero-area q-px-xl">
       <div class="container">
@@ -100,12 +92,11 @@
 import { mapState } from 'vuex'
 import getCurrency from '../mixins/getCurrency'
 import CategorySlider from 'components/CategorySlider'
-import TheHeader from 'components/TheHeader.vue'
 
 export default {
    mixins: [getCurrency],
    components: {
-      CategorySlider, TheHeader
+      CategorySlider,
    },
    computed: {
       ...mapState('data', ['categories', 'products'])

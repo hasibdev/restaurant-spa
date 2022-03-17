@@ -2,7 +2,7 @@
    <div class="container" style="min-height: 100vh">
       <div class="row">
          <div class="col-12 col-md-8 col-lg-6 q-mx-auto">
-            <form class="contact-form" style="margin-top: 70px;">
+            <form class="contact-form" style="margin-top: 100px;">
                <h3 class="text-center">Let's get in touch</h3>
                <p class="text-center q-mt-lg text-body1 text-bold text-grey-9">Leave your details below and get a free trial or an tour</p>
 
