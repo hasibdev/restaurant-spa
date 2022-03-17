@@ -1,13 +1,13 @@
 <template>
    <q-layout view="hHh lpR fFr">
 
-      <q-header class="bg-white text-grey-10">
+      <!-- <q-header class="bg-white text-grey-10">
          <q-toolbar>
             <div class="container">
                <the-header />
             </div>
          </q-toolbar>
-      </q-header>
+      </q-header> -->
 
       <q-drawer v-model="leftDrawerOpen" side="left" overlay behavior="mobile" bordered>
          <!-- drawer content -->
@@ -29,12 +29,14 @@
 
 <script>
 import CartSidebar from 'components/CartSidebar.vue'
-import TheHeader from 'components/TheHeader.vue'
+// import TheHeader from 'components/TheHeader.vue'
 import TheFooter from 'components/TheFooter.vue'
 
 export default {
    components: {
-      CartSidebar, TheHeader, TheFooter
+      CartSidebar,
+      TheFooter,
+      // TheHeader,
    },
    data() {
       return {

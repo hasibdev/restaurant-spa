@@ -1,6 +1,5 @@
 <template>
    <q-page>
-
       <!-- Welcome Overlay -->
       <welcome-overlay />
 
@@ -121,6 +120,7 @@ import CartFab from 'components/CartFab.vue'
 import WelcomeOverlay from 'components/WelcomeOverlay.vue'
 import getCurrency from '../mixins/getCurrency'
 import { Swiper, SwiperSlide } from 'swiper/vue'
+
 // import required modules
 import { FreeMode } from "swiper"
 
@@ -128,7 +128,7 @@ export default defineComponent({
    name: 'PageIndex',
    mixins: [getCurrency],
    components: {
-      CartFab, WelcomeOverlay, Swiper, SwiperSlide,
+      CartFab, WelcomeOverlay, Swiper, SwiperSlide
    },
    data() {
       return {
