@@ -8,7 +8,7 @@ export default {
          products: null,
          settings: null,
          dataLoaded: false,
-         showWelcome: false
+         showWelcome: false,
       }
    },
    getters: {

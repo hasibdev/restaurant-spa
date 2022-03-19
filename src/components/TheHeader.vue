@@ -37,7 +37,7 @@
 
       <!-- Righ Avatar -->
       <div>
-         <q-avatar rounded>
+         <q-avatar rounded @click="handleAuth" class="cursor-pointer">
             <img src="https://cdn.quasar.dev/img/boy-avatar.png">
          </q-avatar>
       </div>
@@ -46,6 +46,7 @@
 
 <script>
 import CartFab from 'components/CartFab.vue'
+import { mapMutations } from 'vuex'
 export default {
    components: {
       CartFab,
@@ -56,12 +57,22 @@ export default {
       }
    },
    methods: {
+      ...mapMutations('data', ['SET_AUTH_MODAL']),
       toggleLeftDrawer() {
          this.emitter.emit('toggle-leftbar', true)
       },
       checkSmallHeader(val) {
          if (val > 10) this.smallheader = true
          else this.smallheader = false
+      },
+      handleAuth() {
+         const loggedIn = this.$store.state.auth.loggedIn
+         if (loggedIn) {
+            console.log('Go profile')
+         } else {
+            console.log('Open modal')
+            this.emitter.emit('toggle-auth-modal')
+         }
       }
    },
 

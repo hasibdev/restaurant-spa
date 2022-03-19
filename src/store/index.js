@@ -3,6 +3,7 @@ import { createStore } from 'vuex'
 import data from './data'
 import cart from './cart'
 import menu from './menu'
+import auth from './auth'
 
 // import example from './module-example'
 
@@ -21,6 +22,7 @@ export default store(function (/* { ssrContext } */) {
          data,
          cart,
          menu,
+         auth
       },
 
       // enable strict mode (adds overhead!)
