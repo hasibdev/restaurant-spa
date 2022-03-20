@@ -25,6 +25,14 @@ const routes = [
                middleware: [checkout]
             },
          },
+         {
+            path: '/profile',
+            name: 'profile',
+            component: () => import('pages/profile.vue'),
+            // meta: {
+            //    middleware: [checkout]
+            // },
+         },
       ]
    },
 

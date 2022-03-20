@@ -4,9 +4,11 @@
       <div>
          <q-btn v-if="!$q.screen.gt.sm" dense flat round icon="menu" @click="toggleLeftDrawer" />
 
-         <q-avatar square>
-            <img src="https://cdn.quasar.dev/logo-v2/svg/logo.svg" />
-         </q-avatar>
+         <router-link to="/">
+            <q-avatar square>
+               <img src="https://cdn.quasar.dev/logo-v2/svg/logo.svg" />
+            </q-avatar>
+         </router-link>
       </div>
 
       <!-- Menu -->
@@ -68,7 +70,7 @@ export default {
       handleAuth() {
          const loggedIn = this.$store.state.auth.loggedIn
          if (loggedIn) {
-            console.log('Go profile')
+            this.$router.push('/profile')
          } else {
             console.log('Open modal')
             this.emitter.emit('toggle-auth-modal')
