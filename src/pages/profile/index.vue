@@ -26,17 +26,17 @@
 
             <!-- City -->
             <label class="block">City</label>
-            <q-input dense v-model="profileForm.meta.city" type="text" placeholder="Enter your City" ref="City" :rules="[val => !!val || 'City is required']" />
+            <q-input dense v-model="profileForm.meta.city" type="text" placeholder="Enter your City" ref="city" :rules="[val => !!val || 'City is required']" />
 
             <!-- Zip -->
             <label class="block">Zip</label>
-            <q-input dense v-model="profileForm.meta.zip" type="text" placeholder="Enter your Zip" ref="Zip" :rules="[val => !!val || 'Zip is required']" />
+            <q-input dense v-model="profileForm.meta.zip" type="text" placeholder="Enter your Zip" ref="zip" :rules="[val => !!val || 'Zip is required']" />
 
             <!-- Street -->
             <label class="block">Street</label>
-            <q-input dense v-model="profileForm.meta.street" type="text" placeholder="Enter your Street" ref="Street" :rules="[val => !!val || 'Street is required']" />
+            <q-input dense v-model="profileForm.meta.street" type="text" placeholder="Enter your Street" ref="street" :rules="[val => !!val || 'Street is required']" />
 
-            <q-btn color="primary" class="q-px-lg">Update</q-btn>
+            <q-btn color="primary" @click="updateProfile" class="q-px-xl q-mt-md">Update</q-btn>
 
          </div>
       </div>
@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import { extend } from 'quasar'
 export default {
    name: 'Profile',
@@ -77,7 +77,7 @@ export default {
          Customer: 5
       }
 
-      const user = extend({}, this.user)
+      const user = extend(true, {}, this.user)
 
       this.profileForm = {
          ...this.profileForm,
@@ -93,6 +93,67 @@ export default {
             zip: '',
             address: ''
          }
+      }
+   },
+   methods: {
+      ...mapActions('auth', ['syncProfile']),
+      async updateProfile() {
+         if (!this.validateProfile()) {
+            return
+         }
+
+         try {
+            this.$q.loading.show({ message: 'Please wait...' })
+
+            const config = {
+               headers: {
+                  'X-User': this.$store.state.auth.user.id
+               }
+            }
+            this.profileForm.name = this.profileForm.full_name
+
+            const res = await this.$api.patch('/users', this.profileForm, config)
+
+
+            this.$q.notify({
+               message: 'Updated Successfully!',
+               color: 'positive',
+               position: 'top-right',
+               icon: 'done',
+            })
+            this.syncProfile()
+         } catch (error) {
+            console.log(error)
+            this.$q.notify({
+               message: 'Request Fail!',
+               color: 'negative',
+               position: 'top-right',
+               icon: 'cancel',
+            })
+         } finally {
+            this.$q.loading.hide()
+         }
+      },
+      validateProfile() {
+         this.$refs.fullname.validate()
+         this.$refs.username.validate()
+         this.$refs.phone.validate()
+         this.$refs.email.validate()
+         this.$refs.country.validate()
+         this.$refs.city.validate()
+         this.$refs.zip.validate()
+         this.$refs.street.validate()
+
+         return !(
+            this.$refs.fullname.hasError ||
+            this.$refs.username.hasError ||
+            this.$refs.phone.hasError ||
+            this.$refs.email.hasError ||
+            this.$refs.country.hasError ||
+            this.$refs.city.hasError ||
+            this.$refs.zip.hasError ||
+            this.$refs.street.hasError
+         )
       }
    },
 }

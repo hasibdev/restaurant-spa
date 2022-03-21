@@ -1,6 +1,6 @@
 <template>
    <q-page>
-      <div class="container">
+      <div class="container q-mb-xl">
          <div class="row q-mt-md">
             <div class="col-12 col-md-3">
                <q-list bordered separator>
