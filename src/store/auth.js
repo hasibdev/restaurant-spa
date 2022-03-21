@@ -39,6 +39,13 @@ export default {
             return Promise.reject(error)
          }
       },
+      logout({ commit }) {
+         localStorage.removeItem('token')
+         localStorage.removeItem('userId')
+
+         commit('SET_DATA', { property: 'user', data: null })
+         commit('SET_DATA', { property: 'loggedIn', data: false })
+      },
       setStorage({ }, res) {
          const token = res.data.payload.token
          const userId = res.data.payload.id

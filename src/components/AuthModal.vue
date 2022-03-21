@@ -83,8 +83,8 @@ export default {
          mode: 'signin',
          errorMessage: '',
          signinForm: {
-            user: 'hasib',
-            password: '12345678'
+            user: '',
+            password: ''
          },
          signupForm: {
             name: '',
@@ -127,6 +127,7 @@ export default {
             })
 
             this.closeModal()
+            this.resetAllForm()
          } catch (error) {
             this.$q.notify({
                message: 'Signin Fail!',
@@ -160,6 +161,7 @@ export default {
             })
 
             this.closeModal()
+            this.resetAllForm()
          } catch (error) {
             console.log(error)
             this.$q.notify({
@@ -188,6 +190,31 @@ export default {
             this.$refs.password.hasError ||
             this.$refs['confirmed-password'].hasError
          )
+      },
+      resetAllForm() {
+         this.signinForm = {
+            user: '',
+            password: ''
+         }
+
+         this.signupForm = {
+            name: '',
+            username: '',
+            phone: '',
+            address: {},
+            email: '',
+            password: ''
+         }
+
+         this.forgetForm = {
+            email: ''
+         }
+
+         this.resetForm = {
+            email: '',
+            otp: '',
+            new_password: ''
+         }
       }
    },
 
