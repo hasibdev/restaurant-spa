@@ -6,19 +6,19 @@ const routes = [
       component: () => import('layouts/MainLayout.vue'),
       children: [
          { path: '', component: () => import('pages/Index.vue') },
-         { path: '/products/:id', component: () => import('pages/products/details.vue') },
+         { path: 'products/:id', component: () => import('pages/products/details.vue') },
          {
-            path: '/shop',
+            path: 'shop',
             name: 'shop',
             component: () => import('pages/shop.vue'),
          },
          {
-            path: '/contact',
+            path: 'contact',
             name: 'contact',
             component: () => import('pages/contact.vue'),
          },
          {
-            path: '/checkout',
+            path: 'checkout',
             name: 'checkout',
             component: () => import('pages/checkout.vue'),
             meta: {
@@ -26,8 +26,8 @@ const routes = [
             },
          },
          {
-            path: '/profile',
-            name: 'profile',
+            path: 'profile',
+            name: 'profileroot',
             component: () => import('pages/profile.vue'),
             children: [
                {

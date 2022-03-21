@@ -2,7 +2,7 @@
    <q-page>
       <div class="container">
          <div class="row q-mt-md">
-            <div class="col-lg-3 col-12">
+            <div class="col-12 col-md-3">
                <q-list bordered separator>
                   <q-item clickable v-ripple exact to="/profile">
                      <q-item-section avatar>
@@ -36,7 +36,7 @@
             </div>
 
             <!-- Router content -->
-            <div class="col-lg-9 col-12">
+            <div class="col-12 col-md-9 q-mt-lg mt-md-none">
                <router-view></router-view>
             </div>
          </div>
@@ -46,6 +46,7 @@
 
 <script>
 export default {
+   name: 'ProfileRoot'
 
 }
 </script>

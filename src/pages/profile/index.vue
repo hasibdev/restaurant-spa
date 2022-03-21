@@ -5,7 +5,7 @@
 
          <div class="q-mt-lg">
             <!-- Name -->
-            <label>Full Name</label>
+            <label class="block">Full Name</label>
             <q-input dense v-model="profileForm.full_name" type="text" placeholder="Enter your Name" ref="fullname" :rules="[val => !!val || 'Name is required']" />
 
             <!-- Username -->
@@ -21,20 +21,22 @@
             <q-input dense v-model="profileForm.email" type="text" placeholder="Enter your Email" ref="email" :rules="[val => !!val || 'Email is required']" />
 
             <!-- Country -->
-            <label>Country</label>
+            <label class="block">Country</label>
             <q-input dense v-model="profileForm.meta.country" type="text" placeholder="Enter your Country" ref="country" :rules="[val => !!val || 'Country is required']" />
 
             <!-- City -->
-            <label>City</label>
+            <label class="block">City</label>
             <q-input dense v-model="profileForm.meta.city" type="text" placeholder="Enter your City" ref="City" :rules="[val => !!val || 'City is required']" />
 
             <!-- Zip -->
-            <label>Zip</label>
+            <label class="block">Zip</label>
             <q-input dense v-model="profileForm.meta.zip" type="text" placeholder="Enter your Zip" ref="Zip" :rules="[val => !!val || 'Zip is required']" />
 
             <!-- Street -->
-            <label>Street</label>
+            <label class="block">Street</label>
             <q-input dense v-model="profileForm.meta.street" type="text" placeholder="Enter your Street" ref="Street" :rules="[val => !!val || 'Street is required']" />
+
+            <q-btn color="primary" class="q-px-lg">Update</q-btn>
 
          </div>
       </div>
@@ -43,6 +45,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import { extend } from 'quasar'
 export default {
    name: 'Profile',
    data() {
@@ -64,7 +67,7 @@ export default {
    computed: {
       ...mapState('auth', ['user'])
    },
-   mounted() {
+   created() {
       let roles = {
          'Super Admin': 0,
          Admin: 1,
@@ -74,17 +77,13 @@ export default {
          Customer: 5
       }
 
+      const user = extend({}, this.user)
+
       this.profileForm = {
          ...this.profileForm,
-         ...this.user,
-         name: this.user.full_name,
-         role: roles[this.user.role]
-      }
-      this.profileForm = {
-         ...this.profileForm,
-         ...this.user,
-         name: this.user.full_name,
-         role: roles[this.user.role]
+         ...user,
+         name: user.full_name,
+         role: roles[user.role]
       }
 
       if (!this.profileForm.meta) {
@@ -94,22 +93,6 @@ export default {
             zip: '',
             address: ''
          }
-      }
-
-      if (!this.profileForm.meta.address) {
-         this.profileForm.meta.address = ''
-      }
-
-      if (!this.profileForm.meta.zip) {
-         this.profileForm.meta.zip = ''
-      }
-
-      if (!this.profileForm.meta.city) {
-         this.profileForm.meta.city = ''
-      }
-
-      if (!this.profileForm.meta.country) {
-         this.profileForm.meta.country = ''
       }
    },
 }

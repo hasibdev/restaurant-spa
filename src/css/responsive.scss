@@ -1,15 +1,21 @@
+// Extra Large Device
+@media (min-width: 1920px) {
+
+}
+
 // Large Device
-@media (min-width: $breakpoint-md) {
+@media (min-width: 1440px) {
 
 }
 
 // //////////////////////////////////
 // Medium Device
-@media (min-width: $breakpoint-sm) {
+@media (min-width: 1024px) {
    .px-xl-md {
       padding-left: 48px;
       padding-right: 48px;
    }
+
    .px-md-md {
       padding-left: 16px;
       padding-right: 16px;
@@ -23,6 +29,9 @@
    }
    .mb-md-none {
       margin-bottom: 0;
+   }
+   .mt-md-none {
+      margin-top: 0 !important;
    }
    .justiry-md-center {
       justify-content: center;
@@ -43,7 +52,7 @@
 
 // /////////////////////////////////
 // Small Device
-@media (min-width: $breakpoint-xs) {
+@media (min-width: 600px) {
    .px-xl-sm {
       padding-left: 48px;
       padding-right: 48px;
@@ -61,7 +70,7 @@
 
 // ///////////////////////////////////
 // Mobile Device
-@media (max-width: $breakpoint-xs) {
+@media (max-width: 599px) {
    h2 {
       font-size: 30px;
       line-height: 20px;
