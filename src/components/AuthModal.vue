@@ -10,13 +10,17 @@
             <q-card-section class="q-pt-none">
                <p class="text-red" v-if="errorMessage">{{ errorMessage }}</p>
 
-               <!-- User -->
-               <label class="block">Username or Email</label>
-               <q-input dense v-model="signinForm.user" type="text" autofocus placeholder="Enter your username or email" ref="user" :rules="[val => !!val || 'Username or Email is required']" />
+               <form @submit.prevent="onSignin">
+                  <!-- User -->
+                  <label class="block">Username or Email</label>
+                  <q-input dense v-model="signinForm.user" type="text" autofocus placeholder="Enter your username or email" ref="user" :rules="[val => !!val || 'Username or Email is required']" />
 
-               <!-- Password -->
-               <label class="block">Password</label>
-               <q-input dense v-model="signinForm.password" type="password" placeholder="Enter your Password" :rules="[val => !!val || 'Password is required']" />
+                  <!-- Password -->
+                  <label class="block">Password</label>
+                  <q-input dense v-model="signinForm.password" type="password" placeholder="Enter your Password" :rules="[val => !!val || 'Password is required']" />
+
+                  <input type="submit" value="" class="hidden">
+               </form>
 
                <p class="text-right q-mt-md text-teal">Forget Password?</p>
                <p class="q-mt-md">Don't have any account? <span @click="mode = 'signup'" class="text-teal cursor-pointer">Register Here</span> </p>
