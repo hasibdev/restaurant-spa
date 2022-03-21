@@ -29,9 +29,23 @@ const routes = [
             path: '/profile',
             name: 'profile',
             component: () => import('pages/profile.vue'),
-            // meta: {
-            //    middleware: [checkout]
-            // },
+            children: [
+               {
+                  path: '',
+                  name: 'profile',
+                  component: () => import('pages/profile/index.vue'),
+               },
+               {
+                  path: 'orders',
+                  name: 'orders',
+                  component: () => import('pages/profile/orders.vue'),
+               },
+               {
+                  path: 'change-password',
+                  name: 'change-password',
+                  component: () => import('pages/profile/changePassword.vue'),
+               }
+            ]
          },
       ]
    },

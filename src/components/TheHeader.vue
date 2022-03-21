@@ -15,17 +15,17 @@
       <div v-if="$q.screen.gt.sm">
          <ul class="menu-ul flex items-center">
             <li>
-               <router-link to="/" class=" q-pa-sm q-mx-sm text-weight-medium text-grey-8 text-body2" style="font-size: 17px;">
+               <router-link to="/" class=" q-pa-sm q-mx-sm text-weight-medium text-grey-8 text-body2" style="font-size: 16px;">
                   Home
                </router-link>
             </li>
             <li>
-               <router-link to="/shop" class=" q-pa-sm q-mx-sm text-weight-medium text-grey-8 text-body2" style="font-size: 17px;">
+               <router-link to="/shop" class=" q-pa-sm q-mx-sm text-weight-medium text-grey-8 text-body2" style="font-size: 16px;">
                   Shop
                </router-link>
             </li>
             <li>
-               <router-link to="/contact" class=" q-pa-sm q-mx-sm text-weight-medium text-grey-8 text-body2" style="font-size: 17px;">
+               <router-link to="/contact" class=" q-pa-sm q-mx-sm text-weight-medium text-grey-8 text-body2" style="font-size: 16px;">
                   Contact Us
                </router-link>
             </li>
