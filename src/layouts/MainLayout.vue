@@ -13,7 +13,33 @@
       <!-- Left side menu items -->
       <q-drawer v-model="leftDrawerOpen" side="left" overlay behavior="mobile" bordered>
          <!-- drawer content -->
-         <p>Menu items</p>
+         <q-list bordered separator>
+            <q-item clickable v-ripple exact to="/">
+               <q-item-section>
+                  <q-avatar square>
+                     <img src="https://cdn.quasar.dev/logo-v2/svg/logo.svg" />
+                  </q-avatar>
+               </q-item-section>
+            </q-item>
+
+            <q-item clickable v-ripple exact to="/">
+               <q-item-section>
+                  <q-item-label>Home</q-item-label>
+               </q-item-section>
+            </q-item>
+
+            <q-item clickable v-ripple exact to="/shop">
+               <q-item-section>
+                  <q-item-label>Shop</q-item-label>
+               </q-item-section>
+            </q-item>
+
+            <q-item clickable v-ripple exact to="contact">
+               <q-item-section>
+                  <q-item-label>Contact Us</q-item-label>
+               </q-item-section>
+            </q-item>
+         </q-list>
       </q-drawer>
 
       <!-- Right cart drawer -->

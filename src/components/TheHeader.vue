@@ -39,7 +39,8 @@
 
       <!-- Righ Avatar -->
       <div>
-         <q-avatar rounded @click="handleAuth" class="cursor-pointer">
+         <cart-fab v-if="!$q.screen.gt.sm"></cart-fab>
+         <q-avatar rounded @click="handleAuth" class="cursor-pointer q-ml-md">
             <img src="https://cdn.quasar.dev/img/boy-avatar.png">
          </q-avatar>
       </div>
