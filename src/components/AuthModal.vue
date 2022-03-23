@@ -61,7 +61,7 @@
 
                <!-- Confirmed password -->
                <label class="block">Confirmed Password</label>
-               <q-input dense v-model="signupConfirmed" type="password" placeholder="Confirmed Password" ref="confirmed-password" :rules="[val => val === signupForm.password || `Password dosen't match`]" />
+               <q-input dense v-model="signupConfirmed" type="password" placeholder="Confirmed Password" ref="confirmed-password" :rules="[val => !!val || 'Please confirm your Password',, val => val === signupForm.password || `Password dosen't match`]" />
 
                <p class="q-mt-lg">Already have an account? <span @click="mode = 'signin'" class="text-teal cursor-pointer">Please Signin</span> </p>
 

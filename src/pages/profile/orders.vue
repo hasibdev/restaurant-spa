@@ -1,9 +1,13 @@
 <template>
-   <div class="q-px-md q-ml-md">
+   <div class="q-px-md q-pt-md rounded-borders q-pb-xl q-ml-md bg-grey-2">
       <h4>My orders</h4>
 
       <div class="q-mt-lg">
-         <q-table :rows="orders" :columns="columns" />
+         <q-table hide-pagination :rows="orders" :columns="columns" :pagination="pagination" />
+      </div>
+
+      <div class="row justify-center q-mt-md">
+         <q-pagination v-model="pagination.page" color="grey-8" :max="pagesNumber" size="sm" />
       </div>
    </div>
 </template>
@@ -19,7 +23,12 @@ export default {
    data() {
       return {
          orders: [],
-
+         pagination: {
+            sortBy: 'desc',
+            descending: false,
+            page: 1,
+            rowsPerPage: 20
+         },
       }
    },
    computed: {
@@ -30,6 +39,9 @@ export default {
             { label: "Date", field: row => date.formatDate(row.datetime, 'MMM Do YY') },
             { label: "Status", field: row => this.capitalize(row.content.status) },
          ]
+      },
+      pagesNumber() {
+         return Math.ceil(this.orders.length / this.pagination.rowsPerPage)
       }
    },
    methods: {

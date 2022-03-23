@@ -43,7 +43,7 @@ const routes = [
                {
                   path: 'change-password',
                   name: 'change-password',
-                  component: () => import('pages/profile/changePassword.vue'),
+                  component: () => import('src/pages/profile/change-password.vue'),
                }
             ]
          },
