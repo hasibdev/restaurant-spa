@@ -78,7 +78,7 @@ export default {
       // deliveryCost: state => (state.checkout && state.checkout.deliveryArea ? parseFloat(state.checkout.deliveryArea.deliveryCost) : 0),
       // Delivery cost is temp
       deliveryCost: state => 0,
-      orderTotal: (state, getters) => parseFloat(getters.getCartTotal) + parseFloat(getters.deliveryCost) + parseFloat(getters.tax) - parseFloat(getters.discountsTotal),
+      orderTotal: (state, getters) => (parseFloat(getters.getCartTotal) + parseFloat(getters.deliveryCost) + parseFloat(getters.tax) - parseFloat(getters.discountsTotal)).toFixed(2),
    },
    mutations: {
       SET_DATA(state, { property, data }) {

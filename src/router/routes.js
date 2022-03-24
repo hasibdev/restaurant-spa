@@ -1,4 +1,5 @@
 import checkout from '../middlewares/checkout'
+import auth from '../middlewares/auth'
 
 const routes = [
    {
@@ -29,6 +30,9 @@ const routes = [
             path: 'profile',
             name: 'profileroot',
             component: () => import('pages/profile.vue'),
+            meta: {
+               middleware: [auth]
+            },
             children: [
                {
                   path: '',

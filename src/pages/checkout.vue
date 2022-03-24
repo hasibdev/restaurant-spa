@@ -173,6 +173,7 @@ export default {
    computed: {
       ...mapGetters('cart', ['cartItems', 'hasCartItem', 'getTotalPerItem', 'getCartTotal', 'tax', 'discountsTotal', 'orderTotal', 'freeProducts', 'deliveryCost']),
       ...mapState('data', ['settings']),
+      ...mapState('auth', ['user', 'loggedIn']),
       ...mapGetters('data', ['deliveryAreas', 'currency']),
       ...mapGetters('menu', ['activeOffers']),
       ifDelevery() {
@@ -182,6 +183,7 @@ export default {
    mounted() {
       this.emitter.emit("toggle-sidebar", false)
       this.updateOffers()
+      this.setAuthUserInfo()
    },
    methods: {
       ...mapActions('menu', ['updateOffers']),
@@ -228,7 +230,7 @@ export default {
                tax: this.tax,
                deliveryCost: this.deliveryCost,
                productsTotal: this.getCartTotal,
-               customerId: null,
+               customerId: this.loggedIn ? this.user.id : null,
                orderFrom: 'web'
             }
          }
@@ -258,6 +260,15 @@ export default {
          } finally {
             this.submitting = false
             waitNotification()
+         }
+      },
+      setAuthUserInfo() {
+         if (this.loggedIn) {
+            this.checkoutPrototype.name = this.user.full_name
+            this.checkoutPrototype.email = this.user.email
+            this.checkoutPrototype.phone = this.user.phone
+            this.checkoutPrototype.street = this.user.meta.street || ''
+            this.checkoutPrototype.zipCode = this.user.meta.zip || ''
          }
       }
    }
