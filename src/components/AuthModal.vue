@@ -147,15 +147,15 @@ export default {
             password: ''
          },
          signupForm: {
-            name: 'Hasib',
-            username: 'hasib',
-            phone: '0123456789',
+            name: '',
+            username: '',
+            phone: '',
             address: {},
-            email: 'hasib@test.com',
-            password: '12345678'
+            email: '',
+            password: ''
          },
 
-         signupConfirmed: '12345678',
+         signupConfirmed: '',
          resetConfirmed: '',
 
          forgetForm: {
@@ -229,6 +229,8 @@ export default {
          }
       },
       async onSignup() {
+         this.validationError = null
+         this.validationResetSignup()
          if (!this.validateSignup()) {
             return
          }
@@ -252,7 +254,6 @@ export default {
                this.validationError = {
                   ...error.response.data.payload.error
                }
-
             }
 
             this.$q.notify({
@@ -343,6 +344,14 @@ export default {
             this.$refs.password.hasError ||
             this.$refs['confirmed-password'].hasError
          )
+      },
+      validationResetSignup() {
+         this.$refs.fullname.resetValidation()
+         this.$refs.username.resetValidation()
+         this.$refs.phone.resetValidation()
+         this.$refs.email.resetValidation()
+         this.$refs.password.resetValidation()
+         this.$refs['confirmed-password'].resetValidation()
       },
       validateSignin() {
          this.$refs.user.validate()
