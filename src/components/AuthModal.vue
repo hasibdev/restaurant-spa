@@ -41,23 +41,23 @@
             <q-card-section class="q-pt-none">
                <!-- Name -->
                <label>Full Name</label>
-               <q-input dense v-model="signupForm.name" type="text" autofocus placeholder="Enter your Name" ref="fullname" :rules="[val => !!val || 'Name is required']" />
+               <q-input dense v-model="signupForm.name" type="text" autofocus placeholder="Enter your Name" ref="fullname" :rules="[val => !!val || 'Name is required']" :error="Boolean(nameValidation)" :error-message="nameValidation" />
 
                <!-- Username -->
                <label class="block">Username</label>
-               <q-input dense v-model="signupForm.username" type="text" placeholder="Username" ref="username" :rules="[val => !!val || 'Username is required']" />
+               <q-input dense v-model="signupForm.username" type="text" placeholder="Username" ref="username" :rules="[val => !!val || 'Username is required']" :error="Boolean(usernameValidation)" :error-message="usernameValidation" />
 
                <!-- Phone -->
                <label class="block">Phone</label>
-               <q-input dense v-model="signupForm.phone" type="text" placeholder="Phone" ref="phone" :rules="[val => !!val || 'Phone is required']" />
+               <q-input dense v-model="signupForm.phone" type="text" placeholder="Phone" ref="phone" :rules="[val => !!val || 'Phone is required']" :error="Boolean(phoneValidation)" :error-message="phoneValidation" />
 
                <!-- Email -->
                <label class="block">Email</label>
-               <q-input dense v-model="signupForm.email" type="text" placeholder="Enter your Email" ref="email" :rules="[val => !!val || 'Email is required']" />
+               <q-input dense v-model="signupForm.email" type="text" placeholder="Enter your Email" ref="email" :rules="[val => !!val || 'Email is required']" :error="Boolean(emailValidation)" :error-message="emailValidation" />
 
                <!-- Password -->
                <label class="block">Password</label>
-               <q-input dense v-model="signupForm.password" type="password" placeholder="Enter your Password" ref="password" :rules="[val => !!val || 'Password is required', val => val.length > 7 || 'Password must be atleast 8 characters long.']" />
+               <q-input dense v-model="signupForm.password" type="password" placeholder="Enter your Password" ref="password" :rules="[val => !!val || 'Password is required', val => val.length > 7 || 'Password must be atleast 8 characters long.']" :error="Boolean(passwordValidation)" :error-message="passwordValidation" />
 
                <!-- Confirmed password -->
                <label class="block">Confirmed Password</label>
@@ -147,15 +147,15 @@ export default {
             password: ''
          },
          signupForm: {
-            name: '',
-            username: '',
-            phone: '',
+            name: 'Hasib',
+            username: 'hasib',
+            phone: '0123456789',
             address: {},
-            email: '',
-            password: ''
+            email: 'hasib@test.com',
+            password: '12345678'
          },
 
-         signupConfirmed: '',
+         signupConfirmed: '12345678',
          resetConfirmed: '',
 
          forgetForm: {
@@ -166,8 +166,26 @@ export default {
             otp: '',
             new_password: ''
          },
-
+         validationError: null
       }
+   },
+
+   computed: {
+      nameValidation() {
+         return this.validationError && this.validationError.name
+      },
+      usernameValidation() {
+         return this.validationError && this.validationError.username
+      },
+      emailValidation() {
+         return this.validationError && this.validationError.email
+      },
+      phoneValidation() {
+         return this.validationError && this.validationError.phone
+      },
+      passwordValidation() {
+         return this.validationError && this.validationError.password
+      },
    },
 
    methods: {
@@ -230,7 +248,13 @@ export default {
             this.closeModal()
             this.resetAllForm()
          } catch (error) {
-            console.log(error)
+            if (error.response.status === 400) {
+               this.validationError = {
+                  ...error.response.data.payload.error
+               }
+
+            }
+
             this.$q.notify({
                message: 'Registration Fail!',
                color: 'negative',
@@ -330,7 +354,6 @@ export default {
          )
       },
       validateResetForm() {
-         console.log('Validate')
          this.$refs.otp.validate()
          this.$refs.password.validate()
          this.$refs['confirmed-password'].validate()
