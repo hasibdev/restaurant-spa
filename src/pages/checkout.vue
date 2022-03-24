@@ -137,7 +137,7 @@
 
             <div class="text-center sidebar-bottom-content">
                <input v-model="discountCoupon" class="q-py-md full-width q-pa-md no-border" placeholder="ENTER COUPON" />
-               <q-btn @click="placeOrder" :disable="submitting" color="primary" class="full-width q-py-md text-body1">
+               <q-btn @click="placeOrder" :disable="checkoutDisable || submitting" color="primary" class="full-width q-py-md text-body1">
                   <span v-if="submitting">Please wait...</span>
                   <span v-else>Place Order</span>
                </q-btn>
@@ -178,6 +178,13 @@ export default {
       ...mapGetters('menu', ['activeOffers']),
       ifDelevery() {
          return this.checkoutPrototype.orderType === 'DELIVERY'
+      },
+      checkoutDisable() {
+         return !(
+            this.checkoutPrototype.name &&
+            this.checkoutPrototype.phone &&
+            this.checkoutPrototype.email
+         )
       }
    },
    mounted() {
