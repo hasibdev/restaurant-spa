@@ -1,13 +1,14 @@
 <template>
-   <nav :class="smallheader ? 'q-py-sm' : 'q-py-lg'" class="navbar">
+   <nav class="q-py-sm navbar">
       <!-- Logo -->
       <div>
          <q-btn v-if="!$q.screen.gt.sm" dense flat round icon="menu" @click="toggleLeftDrawer" />
 
          <router-link to="/">
-            <q-avatar square>
-               <img src="https://cdn.quasar.dev/logo-v2/svg/logo.svg" />
-            </q-avatar>
+            <!-- <q-avatar square> -->
+            <!-- <img src="assets/friendly-s-restaurant.svg" /> -->
+            <Logo />
+            <!-- </q-avatar> -->
          </router-link>
       </div>
 
@@ -30,18 +31,14 @@
                </router-link>
             </li>
 
-            <li>
-               <cart-fab></cart-fab>
-            </li>
-
          </ul>
       </div>
 
       <!-- Righ Avatar -->
-      <div>
-         <cart-fab v-if="!$q.screen.gt.sm"></cart-fab>
-         <q-avatar rounded @click="handleAuth" class="cursor-pointer q-ml-md">
-            <img src="https://cdn.quasar.dev/img/boy-avatar.png">
+      <div class="flex items-center">
+         <cart-fab></cart-fab>
+         <q-avatar @click="handleAuth" class="cursor-pointer q-ml-lg">
+            <img :src="require('assets/images/avatar.jpeg')">
          </q-avatar>
       </div>
    </nav>
@@ -50,9 +47,12 @@
 <script>
 import CartFab from 'components/CartFab.vue'
 import { mapMutations } from 'vuex'
+import Logo from 'components/Logo.vue'
+
 export default {
    components: {
       CartFab,
+      Logo
    },
    data() {
       return {
@@ -64,10 +64,10 @@ export default {
       toggleLeftDrawer() {
          this.emitter.emit('toggle-leftbar', true)
       },
-      checkSmallHeader(val) {
-         if (val > 10) this.smallheader = true
-         else this.smallheader = false
-      },
+      // checkSmallHeader(val) {
+      //    if (val > 10) this.smallheader = true
+      //    else this.smallheader = false
+      // },
       handleAuth() {
          const loggedIn = this.$store.state.auth.loggedIn
          if (loggedIn) {
@@ -80,10 +80,10 @@ export default {
    },
 
    mounted() {
-      this.checkSmallHeader(window.scrollY)
-      window.addEventListener('scroll', (e) => {
-         this.checkSmallHeader(window.scrollY)
-      })
+      // this.checkSmallHeader(window.scrollY)
+      // window.addEventListener('scroll', (e) => {
+      //    this.checkSmallHeader(window.scrollY)
+      // })
    },
 
 }
